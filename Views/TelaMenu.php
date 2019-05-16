@@ -19,13 +19,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="inicio.php"><img class="img-responsive logo img-thumbnail" src="../img/pizza01.jpg" alt="" width="200px" height="150px"></a>
+          <a class="navbar-brand" href="../index.php"><img class="img-responsive logo img-thumbnail" src="../img/pizza01.jpg" alt="" width="200px" height="150px"></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
 
           <ul class="nav navbar-nav navbar-right">
 
-            <li class="active"><a href="inicio.php"><span class="glyphicon glyphicon-home"></span> Inicio</a>
+            <li class="active"><a href="../index.php"><span class="glyphicon glyphicon-home"></span> Inicio</a>
             </li>
 
 
@@ -53,7 +53,7 @@
             <ul class="dropdown-menu">
               <li><a href="Usuarios.php">Cadastro Fornecedor</a></li>
               <li><a href="Usuarios.php">Cadastro Produtos</a></li>
-              <li><a href="Usuarios.php">Cadastro Clientes</a></li>
+              <li><a href="TelaCadCliente.php">Cadastro Clientes</a></li>
               <li><a href="Usuarios.php">Cadastro Itens de Cozinha</a></li>
 
             </ul>
