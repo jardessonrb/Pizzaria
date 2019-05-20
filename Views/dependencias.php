@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+
 <link rel="stylesheet" type="text/css" href="../lib/alertifyjs/css/alertify.css">
 <link rel="stylesheet" type="text/css" href="../lib/alertifyjs/css/themes/default.css">
 <link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.css">

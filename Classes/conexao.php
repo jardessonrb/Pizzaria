@@ -1,18 +1,20 @@
-<?php
+<?php 
 
 class conectar{
-
-	private $servidor = "localhost";
+    private $servidor = "localhost";
 	private $usuario = "root";
 	private $senha = "";
-	private $banco = "pizzaria";
-    
-    public function conexao(){
-	      $conexao = mysqli_connect($this->servidor, $this->usuario, $this->senha, $this->banco);
+	private $bd = "pizzaria";
 
-		  return $conexao;
+
+	public function conexao(){
+
+		$conexao = mysqli_connect($this->servidor, $this->usuario, $this->senha, $this->bd);
+
+		return $conexao;
+
+
 	}
-	
 }
 
-?>
+ ?>

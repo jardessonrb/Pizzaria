@@ -19,7 +19,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="../index.php"><img class="img-responsive logo img-thumbnail" src="../img/pizza01.jpg" alt="" width="200px" height="150px"></a>
+          <a class="navbar-brand" href="../index.php"><img class="img-responsive logo img-thumbnail" src="../img/" alt="" width="200px" height="150px"></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
 
@@ -33,17 +33,18 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Gestão Inicial <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="funcionarios.php">Listagem de Pedidos</a></li>
-              <li><a href="Usuarios.php">Iniciar Novo Pedido</a></li>
+              <li><a href="TelaListagemPedidos.php">Listagem de Pedidos</a></li>
+              <li><a href="TelaCadPedidos.php">Iniciar Novo Pedido</a></li>
+              <li><a href="TesteCadastro.php">Cadastro teste</a></li>
             </ul>
           </li>  
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list-alt"></span> Gestão administrativa<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="funcionarios.php">Cadastro Funcionário</a></li>
-              <li><a href="Usuarios.php">Cadastro Usuário</a></li>
-              <li><a href="funcionarios.php">Relátorio de Pedidos</a></li>
+              <li><a href="TelaCadFuncionario.php">Cadastro Funcionário</a></li>
+              <li><a href="TelaCadUsuario.php">Cadastro Usuário</a></li>
+              <li><a href="TelaRelatorioPedido.php">Relátorio de Pedidos</a></li>
             </ul>
           </li>
  
@@ -51,10 +52,10 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Cadastros do Sistema <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="Usuarios.php">Cadastro Fornecedor</a></li>
-              <li><a href="Usuarios.php">Cadastro Produtos</a></li>
+              <li><a href="TelaCadFornecedor.php">Cadastro Fornecedor</a></li>
+              <li><a href="TelaCadProduto.php">Cadastro Produtos</a></li>
               <li><a href="TelaCadCliente.php">Cadastro Clientes</a></li>
-              <li><a href="Usuarios.php">Cadastro Itens de Cozinha</a></li>
+              <li><a href="TelaCadItemCozinha.php">Cadastro Itens de Cozinha</a></li>
 
             </ul>
           </li>   
