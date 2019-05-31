@@ -1,38 +1,31 @@
-<?php 
-session_start();
-if(isset($_SESSION['usuario'])){
-
-	?>
-
-
-	<!DOCTYPE html>
+<!DOCTYPE html>
 	<html>
 	<head>
 		<title>clientes</title>
 		<?php require_once "TelaMenu.php"; ?>
 	</head>
 	<body>
-		<div class="container">
-			<h1>Clientes</h1>
+		<div class="container" style="position: relative; margin-left: 400px; top: 30px" >
+			<h1>Cadastro do Clientes</h1>
 			<div class="row">
 				<div class="col-sm-4">
 					<form id="frmClientes">
 						<label>Nome</label>
-						<input type="text" class="form-control input-sm" id="nome" name="nome">
-						<label>Rua cliente</label>
-						<input type="text" class="form-control input-sm" id="ruacasa" name="ruacasa">
-						<label>Bairro</label>
-						<input type="text" class="form-control input-sm" id="bairrocasa" name="bairrocasa">
-						<label>N° casa</label>
-						<input type="number" class="form-control input-sm" id="numcasa" name="numcasa">
-						<label>Nascimento</label>
-						<input type="date" class="form-control input-sm" id="nascimento" name="nascimento" required="true">
-						<label>Telefone</label>
-						<input type="text" class="form-control input-sm" id="telefone" name="telefone">
+						<input type="text" class="form-control input-sm" id="nome_cliente" name="nome_cliente">
 						<label>CPF</label>
-						<input type="text" class="form-control input-sm" id="cpf" name="cpf">
+						<input type="text" class="form-control input-sm" id="cpf_cliente" name="cpf_cliente">
+						<label>Telefone</label>
+						<input type="text" class="form-control input-sm" id="telefone_cliente" name="telefone_cliente">
+						<label>Nascimento</label>
+						<input type="date" class="form-control input-sm" id="nascimento_cliente" name="nascimento_cliente" required="true">
+						<label>Endereco-Rua</label>
+						<input type="text" class="form-control input-sm" id="rua_cliente" name="rua_cliente">
+						<label>Endereco-Bairro</label>
+						<input type="text" class="form-control input-sm" id="bairro_cliente" name="bairro_cliente">
+						<label>Endereco-N° Casa</label>
+						<input type="number" class="form-control input-sm" id="numero_cliente" name="numero_cliente	">
 						<p></p>
-						<span class="btn btn-primary" id="btnAdicionarCliente">Salvar</span>
+						<span class="btn btn-primary" style="position: relative; margin-left: 315px" id="btnNovoFuncionario">Cadastrar</span>
 					</form>
 				</div>
 				<div class="col-sm-8">
@@ -189,10 +182,3 @@ if(isset($_SESSION['usuario'])){
 			})
 		})
 	</script>
-
-
-	<?php 
-}else{
-	header("location:../index.php");
-}
-?>
