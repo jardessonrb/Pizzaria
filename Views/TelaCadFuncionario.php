@@ -3,6 +3,8 @@
 <head>
 	<title>Cadastro de Fucnionário</title>
 	<?php require_once "dependencias.php" ?>
+	<script src="../lib/jquery-3.2.1.min.js"></script>
+	<script src="../js/funcoes.js"></script>
 
 </head>
 <body>
@@ -19,7 +21,7 @@
 						<label>Data de nascimento</label>
 				        <input type="date" class="form-control input-sm" id="nascimento_funcio" name="nascimento_funcio">
 						<label>CPF do Funcionario</label>
-						<input type="text" class="form-control input-sm" id="cpf_funcio" name="cpf_funcio">
+						<input type="text" maxlength="11" class="form-control input-sm" id="cpf_funcio" name="cpf_funcio">
 						<label>Telefone</label>
 						<input type="text" class="form-control input-sm" id="telefone_funcio" name="telefone_funcio">
 						<label>Data de Admissão</label>
@@ -33,7 +35,7 @@
 						<label>Salário Inicial</label>
 						<input type="text" class="form-control input-sm" id="salario_funcio" name="salario_funcio">
 						<p></p>
-						<span class="btn btn-primary" style="position: relative; margin-left: 315px" id="btnNovoFuncionario">Cadastrar</span>
+						<span class="btn btn-primary" style="position: relative; margin-left: 315px" id="btnCadastrarFuncionario">Cadastrar</span>
 						
 					</form>
 				</div>
@@ -42,3 +44,35 @@
 	
 </body>
 </html>
+
+<script type="text/javascript">
+		$(document).ready(function(){
+			$('#btnCadastrarFuncionario').click(function(){
+
+				vazios=validarFormVazio('frmCadFuncionario');
+
+				if(vazios > 0){
+					alertify.alert("Preencha os Campos!!");
+					return false;
+				}
+
+				dados=$('#frmCadFuncionario').serialize();
+
+				$.ajax({
+					type:"POST",
+					data:dados,
+					url:"../procedimentos/funcionario/cadastrofuncionario.php",
+					success:function(r){
+						alert(r);
+
+						if(r==1){
+							$('#frmCadFuncionario')[0].reset();
+							alertify.success("Funcionário Cadastrado");
+						}else{
+							alertify.error("Funcionário não Cadastrado");
+						}
+					}
+				});
+			});
+		});
+	</script>

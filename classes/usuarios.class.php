@@ -19,6 +19,18 @@ class usuarios{
 		}
 
     }
+
+    public function cadastroUsuario($dados){
+
+    	$c = new conectar();
+    	$conexao = $c->conexao();
+
+
+    	$sql = "INSERT INTO tab_usuarios (usuario, senha, nivel_acesso, cod_funcionario) VALUES ('$dados[0]','$dados[1]','$dados[2]','$dados[3]');";
+
+    	return mysqli_query($conexao, $sql);
+
+    }
 }
 
 ?>

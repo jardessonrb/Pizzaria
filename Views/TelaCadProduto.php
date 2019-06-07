@@ -6,6 +6,7 @@
 		<?php require_once "TelaMenu.php"; ?>
 		<?php require_once "dependencias.php" ?>
 		<script src="../js/funcoes.js"></script>
+		<script src="../lib/jquery-3.2.1.min.js"></script>
 
 	</head>
 	<body>
@@ -23,7 +24,7 @@
 						<label>Descrição</label>
 						<textarea class="form-control input-sm" id="descricao_produto" name="descricao_produto"></textarea>
 						<p></p>
-						<span class="btn btn-primary" style="position: relative; margin-left: 270px" id="btnNovoProduto">Cadastrar</span>
+						<span class="btn btn-primary" style="position: relative; margin-left: 270px" id="btnCadastrarProduto">Cadastrar</span>
 					</form>
 				</div>
 			</div>
@@ -33,9 +34,7 @@
 
 <script type="text/javascript">
 		$(document).ready(function(){
-
-
-			$('#btnCadProduto').click(function(){
+			$('#btnCadastrarProduto').click(function(){
 
 				vazios=validarFormVazio('frmCadProduto');
 
@@ -51,12 +50,12 @@
 					data:dados,
 					url:"../procedimentos/produtos/adicionarProduto.php",
 					success:function(r){
+						alert(r);
 						if(r==1){
 							$('#frmCadProduto')[0].reset();
-						
-							alertify.success("Funcionário Adicionado");
+							alertify.success("Produto cadastrado com sucesso!");
 						}else{
-							alertify.error("Produto cadastrado com sucesso");
+							alertify.error("Produto não cadastrado");
 						}
 					}
 				});

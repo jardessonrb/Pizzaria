@@ -4,6 +4,8 @@
 	<title>Cadastro de Fucnionário</title>
 	<?php require_once "dependencias.php" ?>
 	<?php require_once "TelaMenu.php" ?>
+	<script src="../lib/jquery-3.2.1.min.js"></script>
+	<script src="../js/funcoes.js"></script>
 	
 </head>
 <body>
@@ -30,7 +32,7 @@
 						<label>Endereço-N° Casa</label>
 						<input type="number" class="form-control input-sm" id="numero_fornecedor" name="numero_fornecedor">
 						<p></p>
-						<span class="btn btn-primary" style="position: relative; margin-left: 315px" id="btnNovoFornecedor">Cadastrar</span>
+						<span class="btn btn-primary" style="position: relative; margin-left: 315px" id="btnCadastrarFornecedor">Cadastrar</span>
 						
 					</form>
 				</div>
@@ -39,3 +41,34 @@
 	
 </body>
 </html>
+
+<script type="text/javascript">
+		$(document).ready(function(){
+			$('#btnCadastrarFornecedor').click(function(){
+
+				vazios=validarFormVazio('frmCadFornecedor');
+
+				if(vazios > 0){
+					alertify.alert("Preencha os Campos!!");
+					return false;
+				}
+
+				dados=$('#frmCadFornecedor').serialize();
+
+				$.ajax({
+					type:"POST",
+					data:dados,
+					url:"../procedimentos/fornecedor/cadastrofornecedor.php",
+					success:function(r){
+
+						if(r==1){
+							$('#frmCadFornecedor')[0].reset();
+							alertify.success("Fornecedor Cadastrado");
+						}else{
+							alertify.error("Fornecedor não Cadastrar");
+						}
+					}
+				});
+			});
+		});
+	</script>

@@ -5,14 +5,14 @@ require_once "../../classes/usuarios.class.php";
 
 $obj = new usuarios();
 
-
 $dados = array(
-
-  $_POST['usuario'],
-  $_POST['senha']
+   $_POST['nome_user'],
+   $_POST['senha_user'],
+   $_POST['acesso_user'],
+   $_POST['codigo_funcionario']
 
 );
 
-echo $obj->logar($dados);
+echo $obj->cadastroUsuario($dados);
 
 ?>

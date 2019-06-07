@@ -1,7 +1,7 @@
 <?php 
 
-require_once "../../classes/conexao.php";
-require_once "../../classes/produtos.php";
+require_once "../../classes/conexao.class.php";
+require_once "../../classes/produtos.class.php";
 
 
 $obj = new produtos();
@@ -9,12 +9,13 @@ $obj = new produtos();
 
 
 $dados=array(
-	$_POST['nome'],
-	$_POST['valor'],
-	$_POST['descricao'],
-	$_POST['quantidade']
+	$_POST['nome_produto'],
+	$_POST['valor_produto'],
+	$_POST['descricao_produto'],
+	$_POST['quantidade_produto']
+	
 );
 
-echo $obj->adicionar($dados);
+echo $obj->cadastrarProduto($dados);
 
  ?>

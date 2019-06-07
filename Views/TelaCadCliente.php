@@ -2,7 +2,10 @@
 	<html>
 	<head>
 		<title>clientes</title>
+		<meta charset="utf-8">
 		<?php require_once "TelaMenu.php"; ?>
+		<script src="../lib/jquery-3.2.1.min.js"></script>
+		<script src="../js/funcoes.js"></script>
 	</head>
 	<body>
 		<div class="container" style="position: relative; margin-left: 400px; top: 30px" >
@@ -23,9 +26,9 @@
 						<label>Endereco-Bairro</label>
 						<input type="text" class="form-control input-sm" id="bairro_cliente" name="bairro_cliente">
 						<label>Endereco-N° Casa</label>
-						<input type="number" class="form-control input-sm" id="numero_cliente" name="numero_cliente	">
+						<input type="number" class="form-control input-sm" id="numero_cliente" name="numero_cliente">
 						<p></p>
-						<span class="btn btn-primary" style="position: relative; margin-left: 315px" id="btnNovoFuncionario">Cadastrar</span>
+						<span class="btn btn-primary" style="position: relative; margin-left: 315px" id="btnCadastrarCliente">Cadastrar</span>
 					</form>
 				</div>
 				<div class="col-sm-8">
@@ -37,7 +40,7 @@
 		<!-- Button trigger modal -->
 
 
-		<!-- Modal -->
+		<!-- Modal 
 		<div class="modal fade" id="abremodalClientesUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog modal-sm" role="document">
 				<div class="modal-content">
@@ -68,10 +71,45 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>-->
 
 	</body>
 	</html>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			//$('#tabelaClientesLoad').load("clientes/tabelaClientes.php");
+
+			$('#btnCadastrarCliente').click(function(){
+
+				vazios=validarFormVazio('frmClientes');
+
+				if(vazios > 0){
+					alertify.alert("Preencha os Campos!!");
+					return false;
+				}
+
+				dados=$('#frmClientes').serialize();
+
+				$.ajax({
+					type:"POST",
+					data:dados,
+					url:"../procedimentos/clientes/cadastrocliente.php",
+					success:function(r){
+
+						if(r==1){
+							$('#frmClientes')[0].reset();
+							//$('#tabelaClientesLoad').load("clientes/tabelaClientes.php");
+							alertify.success("Cliente Adicionado");
+						}else{
+							alertify.error("Não foi possível adicionar");
+						}
+					}
+				});
+			});
+		});
+	</script>
 
 	<script type="text/javascript">
 		function adicionarDado(idcliente){
@@ -122,40 +160,7 @@
 		}
 	</script>
 
-	<script type="text/javascript">
-		$(document).ready(function(){
-
-			$('#tabelaClientesLoad').load("clientes/tabelaClientes.php");
-
-			$('#btnAdicionarCliente').click(function(){
-
-				vazios=validarFormVazio('frmClientes');
-
-				if(vazios > 0){
-					alertify.alert("Preencha os Campos!!");
-					return false;
-				}
-
-				dados=$('#frmClientes').serialize();
-
-				$.ajax({
-					type:"POST",
-					data:dados,
-					url:"../procedimentos/clientes/adicionarClientes.php",
-					success:function(r){
-
-						if(r==1){
-							$('#frmClientes')[0].reset();
-							$('#tabelaClientesLoad').load("clientes/tabelaClientes.php");
-							alertify.success("Cliente Adicionado");
-						}else{
-							alertify.error("Não foi possível adicionar");
-						}
-					}
-				});
-			});
-		});
-	</script>
+	
 
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -182,3 +187,17 @@
 			})
 		})
 	</script>
+<script type="text/javascript">
+  $(window).scroll(function() {
+    if ($(document).scrollTop() > 150) {
+      $('.logo').width(100);
+      $('.logo').height(60);
+
+    }
+    else {
+      $('.logo').height(100);
+      $('.logo').width(150);
+    }
+  }
+  );
+</script>

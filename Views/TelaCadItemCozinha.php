@@ -27,12 +27,44 @@
 						<label>Descricão</label>
 						<textarea class="form-control input-sm" id="descricao_produto" name="descricao_produto"></textarea>
 						<label>Categoria Produto</label>
-						<input type="number" class="form-control input-sm" id="categoria_produto" name="categoria_produto">
+						<input type="text" class="form-control input-sm" id="categoria_produto" name="categoria_produto">
 						<p></p>
-						<span class="btn btn-primary" style="position: relative; margin-left: 270px" id="btnNovoProdutoCozinha">Cadastrar</span>
+						<span class="btn btn-primary" style="position: relative; margin-left: 270px" id="btnCadastrarProdutoCozinha">Cadastrar</span>
 					</form>
 				</div>
 			</div>
 		</div>
 </body>
 </html>
+<script type="text/javascript">
+		$(document).ready(function(){
+
+			$('#btnCadastrarProdutoCozinha').click(function(){
+
+				vazios=validarFormVazio('frmCadProdutoCozinha');
+
+				if(vazios > 0){
+					alertify.alert("Preencha os Campos!!");
+					return false;
+				}
+
+				dados=$('#frmCadProdutoCozinha').serialize();
+
+				$.ajax({
+					type:"POST",
+					data:dados,
+					url:"../procedimentos/itenscozinha/cadastraritemcozinha.php",
+					success:function(r){
+						alert(r);
+
+						if(r==1){
+							$('#frmCadProdutoCozinha')[0].reset();
+							alertify.success("Item de Cozinha Cadastrado");
+						}else{
+							alertify.error("Item de Cozinha Não Cadastrado");
+						}
+					}
+				});
+			});
+		});
+	</script>
