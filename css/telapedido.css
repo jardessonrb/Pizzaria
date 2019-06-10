@@ -1,0 +1,32 @@
+#btnCadastrarProduto{
+	position: relative;
+	margin-bottom: 20px;
+}
+#btnBuscarCliente{
+	position: relative;
+	margin-left: 28%;
+}
+
+#btnBuscarProduto{
+	position: relative;
+	margin-left: 28%;
+}
+#btnInserirProduto{
+	position: relative;
+	width: 25%;
+	float: 0.0;
+}
+
+#nome_produto{
+	width: 25%;
+
+}
+#codigo_cliente{
+	width: 25%;
+}
+#valor_produto{
+	width: 15%;
+}
+#quantidade{
+	width: 15%;
+}

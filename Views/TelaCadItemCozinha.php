@@ -1,3 +1,16 @@
+<?php 
+
+require_once "../classes/conexao.class.php";
+
+$c = new conectar();
+$conexao = $c->conexao();
+
+$sql = "SELECT cod_fornecedor, nome_fornecedor FROM tab_fornecedor;";
+
+$result = mysqli_query($conexao, $sql);
+
+?>
+
 <!DOCTYPE html>
 	<html>
 	<head>
@@ -15,7 +28,13 @@
 				<div class="col-sm-4">
 					<form id="frmCadProdutoCozinha">
 						<label>Código Fornecedor</label>
-						<input type="nume" class="form-control input-sm" id="cod_fornecedor" name="cod_fornecedor">
+						<select class="form-control input-sm" id="cod_fornecedor" name="cod_fornecedor">
+						<option value="0" selected="Selecione Fornecedor">Selecione Fornecedor</option>
+						
+						<?php while($mostrar = mysqli_fetch_row($result)): ?>
+							<option value="<?php echo $mostrar[0] ?>"><?php echo $mostrar[1] ?></option>
+						<?php endWhile; ?>
+						</select>
 						<label>Nome</label>
 						<input type="text" class="form-control input-sm" id="nome_produto" name="nome_produto">
 						<label>Quantidade</label>
