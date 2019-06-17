@@ -34,14 +34,14 @@
 	position: relative;
 	top: 30px;
 	margin-left: 5%;
-	margin-top: 30px auto;
+	top: 35px;		
 
 }
 /*###################################*/
 
 #buscar_produto{
 	position: relative;
-	margin-top: 60%;
+	margin-top: 40%;
 }
 #posiciona_form{
 	position: relative;
@@ -68,17 +68,17 @@
 
 #posicionaItem{
 	float: right;
-	margin-top: 10%;	
+	margin-top: 5%;	
 	margin-right: 5%;
 }
 #cabecaTable{
-	background: 
+	background-color: #DDcc00;
 }
 #tableitem{
 	width: 600px;
 }
 #finalizarCompra{
-	position:absolute;
+	position:fixed;
 	margin-left: 17%;
     bottom:15%;
     width:100%;	

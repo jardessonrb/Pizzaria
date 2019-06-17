@@ -1,0 +1,47 @@
+/*Inicio de pesquisa de listagem*/
+.form-control{
+	width: 10%;
+}
+
+#pesquisa{
+
+}
+.principal{
+	margin-top: 4%;
+}
+#de{
+  position: relative;
+  top: 35px;
+}
+#ate{
+  position: relative;
+  margin-left: 14%;
+  top: -20px;
+}
+#dataInicio{
+	position: relative;
+	margin-left: 2%;
+}
+#dataFim{
+	position: relative;
+	margin-left: 17%;
+	top: -53px;
+}
+#btnPesquisaData{
+	position: relative;
+	margin-left: 30%;
+	top: -88px;
+}
+/*Fim da parte de pesquisa pedido lsitagem*/
+#tabeladepedidos{
+	position: relative;
+	border: 0.1px solid;
+	width: 75%;
+	margin-left: 5%;
+
+}
+#topotabela{
+	color: black;
+	background: gray;
+	text-align: center;
+}

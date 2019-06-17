@@ -1,3 +1,13 @@
+<?php
+ require_once "../classes/conexao.class.php";
+
+    $c = new conectar();
+	$conexao=$c->conexao();
+
+	$sql = "SELECT cod_cliente, nome_cliente FROM tab_cliente";
+	$nomes = mysqli_query($conexao, $sql);
+ ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +24,12 @@
 	 <h1>Cadastro Pedido</h1>
 			<div id="buscar_cliente">
 				<form id="frmCadProduto">
-					<input type="text" class="form-control input-sm" id="nome_cliente" name="nome_cliente" placeholder="nome cliente">
+					<select class="form-control input-sm" name="nome_cliente" id="nome_cliente" required>
+							<option value="0" selected="Selecione Cliente">Selecione Cliente</option>
+							<?php while($mostra = mysqli_fetch_row($nomes)):?>
+								<option value="<?php echo $mostra[0] ?>"><?php echo $mostra[1]; ?></option>
+							<?php endWhile; ?>	
+						</select>
 					<span class="btn btn-primary" id="btnBuscarCliente">Buscar</span>
 				</form>
 			</div>
@@ -36,13 +51,13 @@
 	</div>
 	<div id="posicionaItem">
 	    <div id=""> 
-			<table id="tableitem" border="1">
+			<table class="table  table-condensed table-bordered" id="tableitem" border="1">
 				<tr id="cabecaTable">
-					<td>Código</td>
-					<td>Produto</td>
-					<td>Quantidade</td>
-					<td>Valor</td>
-					<td>Cancelar</td>
+					<td width="30">Código</td>
+					<td width="200">Produto</td>
+					<td width="40">Quantidade</td>
+					<td width="100">Valor</td>
+					<td width="80">Cancelar</td>
 				</tr>
 				<tr>
 					<td>teste</td>
