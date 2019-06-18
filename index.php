@@ -54,7 +54,7 @@
 			success:function(r){
 				//alert(r);
 				if(r==1){
-					window.location="views/TelaInicio.php";
+					window.location="Views/TelaInicio.php";
 				}else{
 					alert("Acesso Negado!!");
 				}

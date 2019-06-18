@@ -1,7 +1,8 @@
 /*Inicio de pesquisa de listagem*/
 .form-control{
-	width: 10%;
+	width: 13%;
 }
+
 
 #pesquisa{
 
@@ -15,7 +16,7 @@
 }
 #ate{
   position: relative;
-  margin-left: 14%;
+  margin-left: 16%;
   top: -20px;
 }
 #dataInicio{
@@ -24,12 +25,12 @@
 }
 #dataFim{
 	position: relative;
-	margin-left: 17%;
+	margin-left: 19%;
 	top: -53px;
 }
 #btnPesquisaData{
 	position: relative;
-	margin-left: 30%;
+	margin-left: 34%;
 	top: -88px;
 }
 /*Fim da parte de pesquisa pedido lsitagem*/

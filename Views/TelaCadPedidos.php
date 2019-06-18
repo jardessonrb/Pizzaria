@@ -23,14 +23,14 @@
 	<div id="container" >
 	 <h1>Cadastro Pedido</h1>
 			<div id="buscar_cliente">
-				<form id="frmCadProduto">
+				<form id="frmIniciarPedido">
 					<select class="form-control input-sm" name="nome_cliente" id="nome_cliente" required>
 							<option value="0" selected="Selecione Cliente">Selecione Cliente</option>
 							<?php while($mostra = mysqli_fetch_row($nomes)):?>
 								<option value="<?php echo $mostra[0] ?>"><?php echo $mostra[1]; ?></option>
 							<?php endWhile; ?>	
 						</select>
-					<span class="btn btn-primary" id="btnBuscarCliente">Buscar</span>
+					<span class="btn btn-primary" id="btnIniciarPedido">Iniciar Venda</span>
 				</form>
 			</div>
 
@@ -78,3 +78,30 @@
 	</div>
 </body>
 </html>
+
+
+<script type="text/javascript">
+		$(document).ready(function(){
+			$('#btnIniciarPedido').click(function(){
+
+				dados=$('#frmIniciarPedido').serialize();
+				alert(dados);
+
+				$.ajax({
+					type:"POST",
+					data:dados,
+					url:"../procedimentos/pedidos/iniciarPedido.php",
+					success:function(r){
+						alert(r);
+
+						if(r==1){
+							
+							alertify.success("Pedido iniciado");
+						}else{
+							alertify.error("Pedido não iniciado");
+						}
+					}
+				});
+			});
+		});
+	</script>
