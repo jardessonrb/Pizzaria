@@ -35,8 +35,10 @@
 			</div>
 
 			<div id="buscar_produto">
-				<input type="text" class="form-control input-sm" id="codigo_produto" name="codigo_produto" placeholder="código produto">
-				<span class="btn btn-danger" id="btnBuscarProduto">Buscar</span><br>		
+				<form id="frmBuscarProduto">
+					<input type="text" class="form-control input-sm" id="codigo_produto" name="codigo_produto" placeholder="código produto">
+					<span class="btn btn-danger" id="btnBuscarProduto">Buscar</span><br>		
+				</form>
 			</div>
 			<form id="posiciona_form">
 				<label>Produto:</label>
@@ -78,8 +80,30 @@
 	</div>
 </body>
 </html>
+<script type="text/javascript">
+		$(document).ready(function(){
+			$('#btnBuscarProduto').click(function(){
+
+             dados=$('#frmBuscarProduto').serialize();
+             alert(dados);
+
+				$.ajax({
+					type:"POST",
+					data: dados,
+					url:"../procedimentos/produtos/buscarProdutoPedido.php",
+					success:function(r){
+
+						dado=jQuery.parseJSON(r);
 
 
+						$('#nome_produto').val(dado['nome_produto']);
+						$('#valor_produto').val(dado['valor_produto']);
+					}
+
+				})
+		      });
+		});
+</script>
 <script type="text/javascript">
 		$(document).ready(function(){
 			$('#btnIniciarPedido').click(function(){
@@ -105,3 +129,4 @@
 			});
 		});
 	</script>
+

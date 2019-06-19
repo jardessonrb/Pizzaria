@@ -14,6 +14,21 @@ class produtos{
 
   }
 
+
+  public function buscarProdutoPedido($dados){
+
+  	$con = new conectar();
+  	$conexao = $con->conexao();
+  	var_dump($dados[0]);
+
+  	$sql = "SELECT cod_produtovenda, nome_produto, valor_produto FROM tab_produtovenda WHERE cod_produtovenda='$dados[0]'";
+
+
+  	return mysqli_query($conexao, $sql);
+
+
+  }
+
 }
 
  ?>
