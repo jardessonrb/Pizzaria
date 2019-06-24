@@ -9,8 +9,8 @@ Class Pedido{
 		$conexao = $c->conexao();
 
 		$valto = 10;
-		$codfun = 3;
-    	$data = date('d/m/Y');
+		$codfun = 2;
+    	$data = date('Y/m/d');
     	$hora = date('H:i:s');
     		
 
@@ -20,12 +20,35 @@ Class Pedido{
     	$result = mysqli_query($conexao, $sql);
 
     	if ($result == "false") {
-    		return 0;
-    	} else {
     		return 1;
+    	} else {
+    		return 0;
     	}
     	
 
+
+    }
+
+
+    public function inserirProdutoPedido($dados){
+         $c = new conectar();
+
+        $conexao = $c->conexao();
+
+        $cod_pedido = 42;
+        $cod_produto = 16;
+
+        $sql = "INSERT INTO tab_itempedido(quantidade, cod_produtovenda, cod_pedido) VALUES ('$dados[0]','$cod_produto', '$cod_pedido')";
+        
+
+        $result = mysqli_query($conexao, $sql);
+        
+
+        if ($result == "false") {
+            return 1;
+        } else {
+            return 0;
+        }
 
     }
 }

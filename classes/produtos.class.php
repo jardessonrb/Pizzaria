@@ -17,18 +17,29 @@ class produtos{
 
   public function buscarProdutoPedido($dados){
 
-  	$con = new conectar();
-  	$conexao = $con->conexao();
-  	var_dump($dados[0]);
+    	$con = new conectar();
+    	$conexao = $con->conexao();
 
-  	$sql = "SELECT cod_produtovenda, nome_produto, valor_produto FROM tab_produtovenda WHERE cod_produtovenda='$dados[0]'";
+    	$sql = "SELECT cod_produtovenda, nome_produto, valor_produto FROM tab_produtovenda WHERE cod_produtovenda='$dados[0]'";
 
 
-  	return mysqli_query($conexao, $sql);
+    	$result = mysqli_query($conexao, $sql);
+
+      $mostra = mysqli_fetch_row($result);
+
+     $dados = array(
+
+        'cod_produtovenda' => $mostra[0],
+        'nome_produto' => $mostra[1],
+        'valor_produto' => $mostra[2]
+        
+     );
+
+     return $dados;
 
 
   }
 
 }
 
- ?>
+?>

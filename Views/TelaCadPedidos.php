@@ -7,6 +7,17 @@
 	$sql = "SELECT cod_cliente, nome_cliente FROM tab_cliente";
 	$nomes = mysqli_query($conexao, $sql);
  ?>
+ <?php 
+	require_once "../classes/conexao.class.php";
+   
+	$c = new conectar();
+	$conexao=$c->conexao();
+
+	$sql="SELECT pro.cod_produtovenda, pro.nome_produto,ite.quantidade, pro.valor_produto from  tab_produtovenda pro JOIN tab_itempedido ite on pro.cod_produtovenda = ite.cod_produtovenda where ite.cod_pedido = 42";
+
+	$result = mysqli_query($conexao, $sql);
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -18,6 +29,13 @@
 	<script src="../js/funcoes.js"></script>
 	<script src="../lib/jquery-3.2.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/telapedido.css">
+	<script type="text/javascript">
+		window.onload = function(){
+
+          desabilitarInicio();
+
+		}
+	</script>
 </head>
 <body>
 	<div id="container" >
@@ -45,6 +63,8 @@
 				<input type="text" class="form-control input-sm" id="nome_produto" name="nome_produto" placeholder="nome produto"> 
 				<label>Valor:</label>
 				<input type="text" class="form-control input-sm" id="valor_produto" name="valor_produto" placeholder="valor"> 
+				<label>Codigo:</label>
+				<input type="text" class="form-control input-sm" id="cod_produto" name="cod_produto" placeholder="código produto"><br>
 				<label>Quantidade:</label>
 				<input type="text" class="form-control input-sm" id="quantidade" name="quantidade" placeholder="Quantidade "><br>
 				<span class="btn btn-danger" id="btnInserirProduto">Inserir Produto</span>
@@ -61,13 +81,21 @@
 					<td width="100">Valor</td>
 					<td width="80">Cancelar</td>
 				</tr>
+				<?php while($mostrar = mysqli_fetch_row($result)): ?>
+
 				<tr>
-					<td>teste</td>
-					<td>teste</td>
-					<td>teste</td>
-					<td>teste</td>
-					<td>teste</td>
+					<td><?php echo $mostrar[0]; ?></td>
+					<td><?php echo $mostrar[1]; ?></td>
+					<td><?php echo $mostrar[2]; ?></td>
+					<td><?php echo $mostrar[3]; ?></td>
+					<td>
+					   <span class="btn btn-danger btn-xs" onclick="excluirMemorando('<?php echo $mostrar[0]?>')"><span>
+				        <span class="glyphicon glyphicon-remove"></span>
+				      </span>
+					</td>
 				</tr>
+
+			<?php endWhile; ?>
 
 			</table>
 		</div>
@@ -80,46 +108,77 @@
 	</div>
 </body>
 </html>
+<!--FUNÇÃO RELACIONADA COM INSERIR PRODUTO NO PEDIDO-->
+<script type="text/javascript">
+		$(document).ready(function(){
+			$('#btnInserirProduto').click(function(){
+				dados=$('#posiciona_form').serialize();
+				alert(dados);
+				$.ajax({
+					type:"POST",
+					data:dados,
+					url:"../procedimentos/pedidos/inserirProdutoPedido.php",
+					success:function(r){
+						alert(r);
+						if(r==1){
+							alertify.success("Produto Inserido");
+							limpaCampos();
+						}else{
+							alertify.error("Produto não Inserido");
+						}
+					}
+				});
+			});
+		});
+	</script>
+<!--#######################################################-->
+<!--FUNÇÃO PARA INSERIR NOS INPUTS, O PRODUTO BUSCADO-->
 <script type="text/javascript">
 		$(document).ready(function(){
 			$('#btnBuscarProduto').click(function(){
-
-             dados=$('#frmBuscarProduto').serialize();
-             alert(dados);
-
+				dados=$('#frmBuscarProduto').serialize();
+				alert(dados);
 				$.ajax({
 					type:"POST",
 					data: dados,
 					url:"../procedimentos/produtos/buscarProdutoPedido.php",
 					success:function(r){
-
 						dado=jQuery.parseJSON(r);
 
 
 						$('#nome_produto').val(dado['nome_produto']);
 						$('#valor_produto').val(dado['valor_produto']);
+						//$('#cod_produto').val(dado['cod_produtovenda']);
+						document.getElementById('cod_produto').value= dado['cod_produtovenda'];
+						if (dado['nome_produto'] != null) {
+							abilitarQuantidade();
+						}else{
+							alert("Produto Não Encontrado!");
+						}
+						
+
 					}
 
 				})
 		      });
 		});
 </script>
+<!--################################################################-->
+<!--FUNÇÃO PARA INICIAR PEDIDO-->
 <script type="text/javascript">
 		$(document).ready(function(){
 			$('#btnIniciarPedido').click(function(){
 
 				dados=$('#frmIniciarPedido').serialize();
-				alert(dados);
+				//alert(dados);
 
 				$.ajax({
 					type:"POST",
 					data:dados,
 					url:"../procedimentos/pedidos/iniciarPedido.php",
 					success:function(r){
-						alert(r);
-
 						if(r==1){
-							
+							escondercampo();
 							alertify.success("Pedido iniciado");
 						}else{
 							alertify.error("Pedido não iniciado");
@@ -129,4 +188,44 @@
 			});
 		});
 	</script>
+
+<!--##########################################################-->
+<!--JAVSCRIPT PARA CONTROLE DE CAMPOS-->
+<script type="text/javascript">
+	function escondercampo(){
+			document.getElementById("nome_cliente").disabled = true;
+			document.getElementById("#frmIniciarPedido").hidde();
+	}
+
+	function desabilitarInicio(){
+		document.getElementById("nome_produto").disabled = true;
+		document.getElementById("valor_produto").disabled = true;
+		document.getElementById("quantidade").disabled = true;
+		document.getElementById("cod_produto").disabled = true;
+	}
+
+	function abilitarInicio(){
+		document.getElementById("nome_produto").disabled = false;
+		document.getElementById("valor_produto").disabled = false;
+		document.getElementById("nome_cliente").disabled = false;
+		
+	}
+
+	function abilitarQuantidade(){
+		document.getElementById("quantidade").disabled = false;
+	}
+
+	function limpaCampos(){
+		document.getElementById('nome_produto').value= " ";
+		document.getElementById('valor_produto').value= " ";
+		document.getElementById('cod_produto').value= " ";
+		document.getElementById('quantidade').value= " ";
+		document.getElementById('codigo_produto').value= " ";
+		document.getElementById("quantidade").disabled = true;
+
+
+	}
+
+
+</script>	
 

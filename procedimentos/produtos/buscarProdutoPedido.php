@@ -7,10 +7,10 @@ $obj = new produtos();
 
 $dados = array(
 
-    $_POST['id_produto']
+    $_POST['codigo_produto']
 
 );
 
-echo $obj->buscarProdutoPedido($dados);
+echo json_encode($obj->buscarProdutoPedido($dados));
 
 ?>

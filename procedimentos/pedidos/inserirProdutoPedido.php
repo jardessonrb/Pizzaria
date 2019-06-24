@@ -3,15 +3,14 @@
 require_once "../../classes/pedido.class.php";
 require_once "../../classes/conexao.class.php";
 
-
 $obj = new Pedido();
 
 $dados = array(
 
-   $_POST['nome_cliente']
+    $_POST['quantidade'],
 
 );
 
-echo $obj->iniciarPedido($dados);
+echo $obj->inserirProdutoPedido($dados);
 
 ?>

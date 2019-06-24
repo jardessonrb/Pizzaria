@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 07-Jun-2019 às 03:05
--- Versão do servidor: 10.1.38-MariaDB
--- versão do PHP: 7.3.2
+-- Generation Time: 24-Jun-2019 às 17:10
+-- Versão do servidor: 10.1.35-MariaDB
+-- versão do PHP: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -38,6 +38,13 @@ CREATE TABLE `tab_cliente` (
   `bairro_cliente` varchar(60) CHARACTER SET utf8 DEFAULT NULL,
   `numero` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tab_cliente`
+--
+
+INSERT INTO `tab_cliente` (`cod_cliente`, `nome_cliente`, `cpf_cliente`, `telefone`, `data_nascimento`, `rua_cliente`, `bairro_cliente`, `numero`) VALUES
+(18, 'jardesson ribeiro dos santos', '54585555555', '99568522223', '2019-06-24', 'Centro', 'Centro', 326);
 
 -- --------------------------------------------------------
 
@@ -104,6 +111,19 @@ CREATE TABLE `tab_itempedido` (
   `cod_pedido` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `tab_itempedido`
+--
+
+INSERT INTO `tab_itempedido` (`quantidade`, `cod_produtovenda`, `cod_pedido`) VALUES
+(14, 16, 42),
+(10, 16, 42),
+(10, 16, 42),
+(10, 16, 42),
+(0, 16, 42),
+(4, 16, 42),
+(50, 16, 42);
+
 -- --------------------------------------------------------
 
 --
@@ -136,6 +156,22 @@ CREATE TABLE `tab_pedido` (
   `cod_funcionario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `tab_pedido`
+--
+
+INSERT INTO `tab_pedido` (`cod_pedido`, `data_pedido`, `hora_pedido`, `valor_total`, `cod_cliente`, `cod_funcionario`) VALUES
+(42, '2019-06-24', '16:32:15', 10, 18, 2),
+(43, '2019-06-24', '16:36:15', 10, 18, 2),
+(44, '2019-06-24', '16:37:47', 10, 18, 2),
+(45, '2019-06-24', '16:41:58', 10, 18, 2),
+(46, '2019-06-24', '16:42:44', 10, 18, 2),
+(47, '2019-06-24', '16:43:43', 10, 18, 2),
+(48, '2019-06-24', '16:44:52', 10, 18, 2),
+(49, '2019-06-24', '16:46:54', 10, 18, 2),
+(50, '2019-06-24', '16:48:58', 10, 18, 2),
+(51, '2019-06-24', '17:07:16', 10, 18, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -149,6 +185,13 @@ CREATE TABLE `tab_produtovenda` (
   `descricao_produto` varchar(60) DEFAULT NULL,
   `qnt_produto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tab_produtovenda`
+--
+
+INSERT INTO `tab_produtovenda` (`cod_produtovenda`, `nome_produto`, `valor_produto`, `descricao_produto`, `qnt_produto`) VALUES
+(16, 'Pizza Media', 33.5, 'Quatro queijos', 0);
 
 -- --------------------------------------------------------
 
@@ -237,7 +280,7 @@ ALTER TABLE `tab_usuarios`
 -- AUTO_INCREMENT for table `tab_cliente`
 --
 ALTER TABLE `tab_cliente`
-  MODIFY `cod_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `cod_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tab_fornecedor`
@@ -261,13 +304,13 @@ ALTER TABLE `tab_itenscozinha`
 -- AUTO_INCREMENT for table `tab_pedido`
 --
 ALTER TABLE `tab_pedido`
-  MODIFY `cod_pedido` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cod_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `tab_produtovenda`
 --
 ALTER TABLE `tab_produtovenda`
-  MODIFY `cod_produtovenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `cod_produtovenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tab_usuarios`
