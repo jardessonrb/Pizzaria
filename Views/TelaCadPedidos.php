@@ -122,7 +122,9 @@
 						alert(r);
 						if(r==1){
 							alertify.success("Produto Inserido");
+							window.location.reload();
 							limpaCampos();
+
 						}else{
 							alertify.error("Produto não Inserido");
 						}
@@ -190,11 +192,12 @@
 	</script>
 
 <!--##########################################################-->
-<!--JAVSCRIPT PARA CONTROLE DE CAMPOS-->
+<!--JAVASCRIPT PARA CONTROLE DE CAMPOS-->
 <script type="text/javascript">
 	function escondercampo(){
 			document.getElementById("nome_cliente").disabled = true;
-			document.getElementById("#frmIniciarPedido").hidde();
+			buscarIdPedido();
+			//document.getElementById("#frmIniciarPedido").hidde();
 	}
 
 	function desabilitarInicio(){
@@ -210,6 +213,9 @@
 		document.getElementById("nome_cliente").disabled = false;
 		
 	}
+	function desabilitarNomeCliente(){
+		
+	}
 
 	function abilitarQuantidade(){
 		document.getElementById("quantidade").disabled = false;
@@ -223,8 +229,23 @@
 		document.getElementById('codigo_produto').value= " ";
 		document.getElementById("quantidade").disabled = true;
 
+	}
+	function buscarIdPedido(){
+		dados = 1;
+		$.ajax({
+			type:"POST",
+			data:dados,
+			url:"../procedimentos/pedidos/buscarIdPedido.php",
+			success:function(r){
+				dado=jQuery.parseJSON(r);
+
+				return dado['cod_pedido'];
+			
+			}
+		});
 
 	}
+
 
 
 </script>	

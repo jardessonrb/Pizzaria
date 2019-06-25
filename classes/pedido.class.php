@@ -29,9 +29,8 @@ Class Pedido{
 
     }
 
-
     public function inserirProdutoPedido($dados){
-         $c = new conectar();
+        $c = new conectar();
 
         $conexao = $c->conexao();
 
@@ -51,6 +50,29 @@ Class Pedido{
         }
 
     }
+    public function buscarIdPedido($dado){
+        $c = new conectar();
+
+        $conexao = $c->conexao();
+
+
+        $sql = "SELECT cod_pedido FROM tab_pedido ORDER BY cod_pedido DESC LIMIT 1";
+        
+
+        $result = mysqli_query($conexao, $sql);
+
+        $mostra = mysqli_fetch_row($result);
+
+        $dados = array(
+
+            'cod_pedido' => $mostra[0]
+        
+         );
+
+        return $dados;
+
+    }
+
 }
 
 ?>
