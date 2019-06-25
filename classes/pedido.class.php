@@ -34,10 +34,7 @@ Class Pedido{
 
         $conexao = $c->conexao();
 
-        $cod_pedido = 42;
-        $cod_produto = 16;
-
-        $sql = "INSERT INTO tab_itempedido(quantidade, cod_produtovenda, cod_pedido) VALUES ('$dados[0]','$cod_produto', '$cod_pedido')";
+        $sql = "INSERT INTO tab_itempedido(quantidade, cod_produtovenda, cod_pedido) VALUES ('$dados[0]','$dados[1]', '$dados[2]')";
         
 
         $result = mysqli_query($conexao, $sql);

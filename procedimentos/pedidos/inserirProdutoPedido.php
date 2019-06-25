@@ -8,6 +8,8 @@ $obj = new Pedido();
 $dados = array(
 
     $_POST['quantidade'],
+    $_POST['codigo'],
+    $_POST['numpedido']
 
 );
 

@@ -1,5 +1,5 @@
 <?php
- require_once "../classes/conexao.class.php";
+   require_once "../classes/conexao.class.php";
 
     $c = new conectar();
 	$conexao=$c->conexao();
@@ -7,13 +7,32 @@
 	$sql = "SELECT cod_cliente, nome_cliente FROM tab_cliente";
 	$nomes = mysqli_query($conexao, $sql);
  ?>
+ <?php
+	function ultimoID(){
+	   require_once "../classes/conexao.class.php";
+
+	    $c = new conectar();
+		$conexao=$c->conexao();
+
+		$sql = "SELECT cod_pedido FROM tab_pedido ORDER BY cod_pedido DESC LIMIT 1";
+
+		$result = mysqli_query($conexao, $sql);
+
+		$ultimoId = mysqli_fetch_row($result);
+
+		return $ultimoId[0];
+    }
+
+ ?>
  <?php 
 	require_once "../classes/conexao.class.php";
+
+	$id = ultimoID();
    
 	$c = new conectar();
 	$conexao=$c->conexao();
 
-	$sql="SELECT pro.cod_produtovenda, pro.nome_produto,ite.quantidade, pro.valor_produto from  tab_produtovenda pro JOIN tab_itempedido ite on pro.cod_produtovenda = ite.cod_produtovenda where ite.cod_pedido = 42";
+	$sql="SELECT pro.cod_produtovenda, pro.nome_produto,ite.quantidade, pro.valor_produto from  tab_produtovenda pro JOIN tab_itempedido ite on pro.cod_produtovenda = ite.cod_produtovenda where ite.cod_pedido = '$id' ";
 
 	$result = mysqli_query($conexao, $sql);
 
@@ -48,7 +67,9 @@
 								<option value="<?php echo $mostra[0] ?>"><?php echo $mostra[1]; ?></option>
 							<?php endWhile; ?>	
 						</select>
-					<span class="btn btn-primary" id="btnIniciarPedido">Iniciar Venda</span>
+					<span class="btn btn-primary" id="btnIniciarPedido">Iniciar Venda</span><br>
+					<label>Pedido:</label>
+				    <input type="text" class="form-control input-sm" id="numero_pedido" name="numero_pedido" placeholder="número pedido"><br>
 				</form>
 			</div>
 
@@ -112,11 +133,18 @@
 <script type="text/javascript">
 		$(document).ready(function(){
 			$('#btnInserirProduto').click(function(){
-				dados=$('#posiciona_form').serialize();
-				alert(dados);
+				//dados=$('#posiciona_form').serialize();
+				var cod = document.getElementById("cod_produto").value;
+				var quant = document.getElementById("quantidade").value;
+				var num = document.getElementById("numero_pedido").value;
+				/*var dados = [
+					quant,
+					cod
+				];
+				alert(dados[0]+dados[1]);*/
 				$.ajax({
 					type:"POST",
-					data:dados,
+					data:{codigo: cod, quantidade: quant, numpedido: num},
 					url:"../procedimentos/pedidos/inserirProdutoPedido.php",
 					success:function(r){
 						alert(r);
@@ -197,6 +225,7 @@
 	function escondercampo(){
 			document.getElementById("nome_cliente").disabled = true;
 			buscarIdPedido();
+			buscarIdPedido();
 			//document.getElementById("#frmIniciarPedido").hidde();
 	}
 
@@ -205,6 +234,7 @@
 		document.getElementById("valor_produto").disabled = true;
 		document.getElementById("quantidade").disabled = true;
 		document.getElementById("cod_produto").disabled = true;
+		document.getElementById("numero_pedido").disabled = true;
 	}
 
 	function abilitarInicio(){
@@ -230,6 +260,7 @@
 		document.getElementById("quantidade").disabled = true;
 
 	}
+
 	function buscarIdPedido(){
 		dados = 1;
 		$.ajax({
@@ -239,8 +270,7 @@
 			success:function(r){
 				dado=jQuery.parseJSON(r);
 
-				return dado['cod_pedido'];
-			
+				$('#numero_pedido').val(dado['cod_pedido']);
 			}
 		});
 
