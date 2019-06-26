@@ -38,6 +38,35 @@
 
 ?>
 
+<?php 
+function Valor_Total(){
+	require_once "../classes/conexao.class.php";
+
+	$valor_total_compra = 0;
+
+	$id = ultimoID();
+   
+	$c = new conectar();
+	$conexao=$c->conexao();
+
+	$sql="SELECT ite.quantidade, pro.valor_produto from tab_produtovenda pro JOIN tab_itempedido ite on pro.cod_produtovenda = ite.cod_produtovenda where ite.cod_pedido = '$id' ";
+
+	$result = mysqli_query($conexao, $sql);
+
+	while($mostrar = mysqli_fetch_row($result)):
+
+		$valor_unidade = $mostrar[0] * $mostrar[1];
+
+		$valor_total_compra = $valor_total_compra + $valor_unidade;
+
+	endWhile;
+
+	return $valor_total_compra;
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +76,8 @@
 	<?php require_once "dependencias.php" ?>
 	<script src="../js/funcoes.js"></script>
 	<script src="../lib/jquery-3.2.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="../css/telapedido.css">
+
+	<link rel="stylesheet" type="text/css" href="../css/estiloTelaPedido.css">
 	<script type="text/javascript">
 		window.onload = function(){
 
@@ -57,26 +87,27 @@
 	</script>
 </head>
 <body>
-	<div id="container" >
-	 <h1>Cadastro Pedido</h1>
-			<div id="buscar_cliente">
+	<div id="container">
+       	<div class="divs" id="campos_pedidos">
+       			<div id="buscar_cliente">
 				<form id="frmIniciarPedido">
+					<label id="label_pedido">Pedido:</label>
+				    <input type="text" class="form-control input-sm" id="numero_pedido" name="numero_pedido" placeholder="número pedido">
 					<select class="form-control input-sm" name="nome_cliente" id="nome_cliente" required>
 							<option value="0" selected="Selecione Cliente">Selecione Cliente</option>
 							<?php while($mostra = mysqli_fetch_row($nomes)):?>
 								<option value="<?php echo $mostra[0] ?>"><?php echo $mostra[1]; ?></option>
 							<?php endWhile; ?>	
 						</select>
-					<span class="btn btn-primary" id="btnIniciarPedido">Iniciar Venda</span><br>
-					<label>Pedido:</label>
-				    <input type="text" class="form-control input-sm" id="numero_pedido" name="numero_pedido" placeholder="número pedido"><br>
+					<span class="btn btn-primary" id="btnIniciarPedido">Iniciar Pedido</span><br>
 				</form>
 			</div>
 
 			<div id="buscar_produto">
 				<form id="frmBuscarProduto">
+					<label id="label_pedido">Buscar produto p/ código:</label>
 					<input type="text" class="form-control input-sm" id="codigo_produto" name="codigo_produto" placeholder="código produto">
-					<span class="btn btn-danger" id="btnBuscarProduto">Buscar</span><br>		
+					<span class="btn btn-primary" id="btnBuscarProduto">Buscar</span><br>		
 				</form>
 			</div>
 			<form id="posiciona_form">
@@ -85,30 +116,31 @@
 				<label>Valor:</label>
 				<input type="text" class="form-control input-sm" id="valor_produto" name="valor_produto" placeholder="valor"> 
 				<label>Codigo:</label>
-				<input type="text" class="form-control input-sm" id="cod_produto" name="cod_produto" placeholder="código produto"><br>
-				<label>Quantidade:</label>
+				<input type="text" class="form-control input-sm" id="cod_produto" name="cod_produto" placeholder="código produto">
+				<label>Insira Quantidade:</label>
 				<input type="text" class="form-control input-sm" id="quantidade" name="quantidade" placeholder="Quantidade "><br>
-				<span class="btn btn-danger" id="btnInserirProduto">Inserir Produto</span>
+				<span class="btn btn-primary" id="btnInserirProduto">Inserir Produto</span>
 			</form>
 			<hr id="hrdivision">
 	</div>
-	<div id="posicionaItem">
-	    <div id=""> 
+       	<div class="divs" id="tabela_pedidos">
 			<table class="table  table-condensed table-bordered" id="tableitem" border="1">
-				<tr id="cabecaTable">
+				<tr id="topo_tabela">
 					<td width="30">Código</td>
 					<td width="200">Produto</td>
-					<td width="40">Quantidade</td>
-					<td width="100">Valor</td>
+					<td width="40">QNT</td>
+					<td width="80">Val Produto</td>
+					<td width="80">Total Uni</td>
 					<td width="80">Cancelar</td>
 				</tr>
 				<?php while($mostrar = mysqli_fetch_row($result)): ?>
 
-				<tr>
+				<tr id="corpo_tabela">
 					<td><?php echo $mostrar[0]; ?></td>
 					<td><?php echo $mostrar[1]; ?></td>
 					<td><?php echo $mostrar[2]; ?></td>
 					<td><?php echo $mostrar[3]; ?></td>
+					<td><?php echo $mostrar[2] * $mostrar[3]; ?></td>
 					<td>
 					   <span class="btn btn-danger btn-xs" onclick="excluirMemorando('<?php echo $mostrar[0]?>')"><span>
 				        <span class="glyphicon glyphicon-remove"></span>
@@ -119,14 +151,17 @@
 			<?php endWhile; ?>
 
 			</table>
-		</div>
 			<div id="finalizarCompra">
-				<label>Valor Total</label>
-				<input type="text" id="valor_total" name="valor_total">
-				<span class="btn btn-danger" style="position: relative;" id="btnFinalizarCompra">Concluir
-				</span>
+				<label id="valor_total_label">Valor Total</label>
+				<div id="label_btn">
+					<input type="text" id="valor_total_input" name="valor_total_input">
+					<span class="btn btn-danger" id="btnFinalizarCompra">Concluir
+					</span>
+				</div>
 			</div>
-	</div>
+       		</fieldset>
+       	</div>
+       </div> 
 </body>
 </html>
 <!--FUNÇÃO RELACIONADA COM INSERIR PRODUTO NO PEDIDO-->
@@ -137,11 +172,7 @@
 				var cod = document.getElementById("cod_produto").value;
 				var quant = document.getElementById("quantidade").value;
 				var num = document.getElementById("numero_pedido").value;
-				/*var dados = [
-					quant,
-					cod
-				];
-				alert(dados[0]+dados[1]);*/
+		
 				$.ajax({
 					type:"POST",
 					data:{codigo: cod, quantidade: quant, numpedido: num},
@@ -149,9 +180,11 @@
 					success:function(r){
 						alert(r);
 						if(r==1){
-							alertify.success("Produto Inserido");
+							//alertify.success("Produto Inserido");
+							document.getElementById('valor_total_input').value = <?php echo Valor_Total() ?>;
 							window.location.reload();
 							limpaCampos();
+
 
 						}else{
 							alertify.error("Produto não Inserido");
@@ -225,8 +258,7 @@
 	function escondercampo(){
 			document.getElementById("nome_cliente").disabled = true;
 			buscarIdPedido();
-			buscarIdPedido();
-			//document.getElementById("#frmIniciarPedido").hidde();
+			<?php echo Valor_Total(0) ?>;
 	}
 
 	function desabilitarInicio(){
@@ -252,10 +284,11 @@
 	}
 
 	function limpaCampos(){
-		document.getElementById('nome_produto').value= " ";
-		document.getElementById('valor_produto').value= " ";
-		document.getElementById('cod_produto').value= " ";
-		document.getElementById('quantidade').value= " ";
+
+		document.getElementById('nome_produto').value= "nome produto";
+		document.getElementById('valor_produto').value= "valor produto";
+		document.getElementById('cod_produto').value= "código produto";
+		document.getElementById('quantidade').value= "";
 		document.getElementById('codigo_produto').value= " ";
 		document.getElementById("quantidade").disabled = true;
 
@@ -275,7 +308,6 @@
 		});
 
 	}
-
 
 
 </script>	
