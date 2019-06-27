@@ -70,6 +70,16 @@ Class Pedido{
 
     }
 
+    public function listagemPedido($dados){
+
+        $c = new conectar();
+
+        $conexao = $c->conexao();
+
+        $sql = " ";
+
+    }
+
 }
 
 ?>

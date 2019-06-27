@@ -1,14 +1,16 @@
 <?php 
 
-	require_once "../classes/conexao.class.php";
+	require_once "../../classes/conexao.class.php";
 
 	$c = new conectar();
 
     $conexao = $c->conexao();
 
-    $atual = date('Y/m/d');
+    $data1 = $_POST['dataInicio'];
+    $data2 = $_POST['dataFim'];
+
   
-    $sql =  "SELECT data_pedido, valor_total, hora_pedido,cod_pedido FROM `tab_pedido` WHERE data_pedido >= '$atual' ";
+    $sql =  "SELECT data_pedido, valor_total, hora_pedido,cod_pedido FROM `tab_pedido` WHERE data_pedido  BETWEEN '$data1' AND '$data2'";
 
     $result = mysqli_query($conexao, $sql);
 
@@ -18,25 +20,12 @@
 <html>
 <head>
 	<title>Lista de Pedidos</title>
-	<?php require_once "TelaMenu.php" ?>
-	<link rel="stylesheet" type="text/css" href="../css/estiloListagemPedido.css">
+	
+	<link rel="stylesheet" type="text/css" href="../../css/estiloListagemPedido.css">
 </head>
 <body>
 	<div class="principal">
 		<h2>Listagem de Pedidos</h2>
-		<div id="row">
-
-
-				<div id="pesquisa">
-					<form id="frmpesquisa" action="listagem/listagemPedido.esp.php" method="POST">
-						<span id="de">De</span>
-						<input type="date" class="form-control" id="dataInicio" name="dataInicio" required></input>
-						<span id="ate">Até</span>
-						<input type="date" class="form-control" id="dataFim" name="dataFim" required=""></input>
-						<button type="submit" class="btn btn-danger" id="btnPesquisaData">buscar</button>
-						<!--<span class="btn btn-danger" id="btnPesquisaData">Testar</span>-->
-					</form>
-				</div>
 				<div id="mostrapedidos">
 					<table border="1" class="" id="tabeladepedidos">
 						<tr id="topotabela">
@@ -65,10 +54,10 @@
 					</table>
 					
 				</div>
+				
+			</fieldset>
 		</div>
 	</div>
 
 </body>
 </html>
-
-
