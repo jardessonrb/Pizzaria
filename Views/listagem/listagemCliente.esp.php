@@ -21,7 +21,7 @@
 <head>
 	<title>Lista de Pedidos</title>
 	<?php require_once "../dependencias.php" ?>
-	<link rel="stylesheet" type="text/css" href="../../css/estiloListagemPedido.css">
+	<link rel="stylesheet" type="text/css" href="../../css/listagem_geral.css">
 	<link rel="stylesheet" type="text/css" href="../../lib/bootstrap/css/bootstrap.css">
 
 </head>
@@ -30,7 +30,7 @@
 		<h2>Listagem de Cliente Especifica</h2>
 				<div id="mostrapedidos">
 					<table border="1" class="" id="tabeladepedidos">
-						<tr id="topotabela">
+						<tr id="topo_tabela">
 							<td>Nome Cliente</td>
 							<td>CPF Cliente</td>
 							<td>Bairro</td>

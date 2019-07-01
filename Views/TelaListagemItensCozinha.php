@@ -6,9 +6,8 @@
 
     $conexao = $c->conexao();
 
-    $atual = date('d/m/Y');
     
-    $sql =  "SELECT nome_cliente, cpf_cliente, bairro_cliente, rua_cliente, numero, telefone, cod_cliente FROM tab_cliente";
+    $sql =  "SELECT ite.cod_itenscozinha, fornec.nome_fornecedor, ite.nome_item, ite.quantidade, ite.validade, ite.valor_item, ite.descricao_item, ite.categoria FROM tab_itenscozinha ite JOIN tab_fornecedor fornec ON ite.cod_fornecedor = fornec.cod_fornecedor";
 
     $result = mysqli_query($conexao, $sql);
 
@@ -26,25 +25,27 @@
 <body>
 	<div class="principal">
 		<div id="cabecalho_pesquisa">
-		<h2>Listagem de Clientes</h2>
+		<h2>Listagem Itens de Cozinha</h2>
 				<div id="pesquisa">
-					<form id="frmpesquisa" action="listagem/listagemCliente.esp.php" method="POST">
+					<form id="frmpesquisa" action="" method="POST">
 						<span id="de">Nome</span>
 						<input type="text" class="form-control" id="busca_nome_cliente" name="busca_nome_cliente" placeholder="Digite nome" required></input>
 						<button type="submit" class="btn btn-primary" id="btnPesquisaData">buscar</button>
 						<!--<span class="btn btn-danger" id="btnPesquisaData">Testar</span>-->
 					</form>
 				</div>
-		</div>
+	    </div>
 				<div id="mostrapedidos">
 					<table border="1" class="" id="tabeladepedidos">
 						<tr id="topo_tabela">
-							<td>Nome Cliente</td>
-							<td>CPF Cliente</td>
-							<td>Bairro</td>
-							<td>Rua</td>
-							<td>N° Casa</td>
-							<td>Telefone</td>
+							<td>Código</td>
+							<td>Fornecedor</td>
+							<td>Nome</td>
+							<td>Qnt em Estoque</td>
+							<td>Validade</td>
+							<td>Valor Pago</td>
+							<td>Descricao</td>
+							<td>Categoria</td>
 							<td>Editar</td>
 						</tr>
 
@@ -57,6 +58,8 @@
 							<td><?php echo $mostrar[3]; ?></td>
 							<td><?php echo $mostrar[4]; ?></td>
 							<td><?php echo $mostrar[5]; ?></td>
+							<td><?php echo $mostrar[6]; ?></td>
+							<td><?php echo $mostrar[7]; ?></td>
 							<td>
 								<span  data-toggle="modal" data-target="#abremodalUpdateProduto" class="btn btn-primary btn-xs" onclick="atualizarCliente('<?php echo $mostrar[6] ?>')">
 									<span class="glyphicon glyphicon-pencil"></span>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 24-Jun-2019 às 17:10
+-- Generation Time: 01-Jul-2019 às 17:18
 -- Versão do servidor: 10.1.35-MariaDB
 -- versão do PHP: 7.2.9
 
@@ -44,7 +44,9 @@ CREATE TABLE `tab_cliente` (
 --
 
 INSERT INTO `tab_cliente` (`cod_cliente`, `nome_cliente`, `cpf_cliente`, `telefone`, `data_nascimento`, `rua_cliente`, `bairro_cliente`, `numero`) VALUES
-(18, 'jardesson ribeiro dos santos', '54585555555', '99568522223', '2019-06-24', 'Centro', 'Centro', 326);
+(18, 'jardesson ribeiro dos santos', '54585555555', '99568522223', '2019-06-24', 'Centro', 'Centro', 326),
+(19, 'AugustoTadeu', '9666555555', '9999666666', '1998-06-25', 'centro', 'Centro', 125),
+(20, 'MariÃ¡ Sousa Maos', '454655664', '9525785555', '1995-02-18', 'Sul', 'Sul', 123);
 
 -- --------------------------------------------------------
 
@@ -122,7 +124,105 @@ INSERT INTO `tab_itempedido` (`quantidade`, `cod_produtovenda`, `cod_pedido`) VA
 (10, 16, 42),
 (0, 16, 42),
 (4, 16, 42),
-(50, 16, 42);
+(50, 16, 42),
+(2, 16, 42),
+(100, 16, 42),
+(0, 16, 42),
+(101, 16, 42),
+(102, 16, 42),
+(120, 16, 42),
+(0, 16, 42),
+(16, 16, 42),
+(1, 16, 42),
+(12, 16, 42),
+(16, 16, 42),
+(16, 16, 71),
+(10, 16, 70),
+(20, 16, 70),
+(15, 16, 70),
+(10, 16, 79),
+(1, 16, 79),
+(0, 16, 79),
+(0, 16, 79),
+(0, 16, 79),
+(0, 16, 79),
+(0, 16, 79),
+(0, 16, 79),
+(0, 16, 79),
+(0, 16, 79),
+(0, 16, 79),
+(0, 16, 79),
+(0, 16, 80),
+(0, 16, 80),
+(0, 16, 81),
+(0, 16, 81),
+(0, 16, 81),
+(0, 16, 81),
+(20, 16, 83),
+(2, 16, 83),
+(1, 16, 83),
+(2, 16, 83),
+(0, 16, 83),
+(3, 16, 83),
+(2, 17, 84),
+(5, 16, 84),
+(20, 16, 85),
+(21, 17, 85),
+(0, 16, 85),
+(2, 17, 85),
+(2, 17, 85),
+(20, 16, 85),
+(12, 16, 85),
+(2, 16, 89),
+(10, 17, 89),
+(50, 16, 90),
+(51, 17, 90),
+(2, 20, 91),
+(20, 16, 95),
+(20, 16, 96),
+(10, 17, 96),
+(5, 16, 96),
+(2, 17, 99),
+(1, 16, 99),
+(1, 16, 100),
+(2, 16, 100),
+(1, 17, 100),
+(1, 16, 100),
+(1, 17, 100),
+(1, 16, 101),
+(2, 16, 101),
+(2, 16, 101),
+(2, 16, 101),
+(2, 16, 101),
+(2, 16, 101),
+(2, 16, 101),
+(1, 16, 101),
+(1, 16, 101),
+(1, 16, 102),
+(1, 16, 102),
+(1, 16, 102),
+(1, 17, 102),
+(1, 17, 102),
+(1, 16, 103),
+(2, 16, 103),
+(3, 16, 103),
+(0, 16, 104),
+(1, 16, 104),
+(3, 17, 104),
+(1, 16, 104),
+(1, 16, 104),
+(0, 16, 104),
+(1, 16, 105),
+(2, 17, 105),
+(1, 16, 106),
+(2, 17, 106),
+(1, 16, 107),
+(2, 17, 107),
+(16, 16, 108),
+(1, 16, 108),
+(1, 16, 109),
+(20, 16, 110),
+(1, 16, 111);
 
 -- --------------------------------------------------------
 
@@ -141,6 +241,13 @@ CREATE TABLE `tab_itenscozinha` (
   `categoria` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `tab_itenscozinha`
+--
+
+INSERT INTO `tab_itenscozinha` (`cod_itenscozinha`, `cod_fornecedor`, `nome_item`, `quantidade`, `validade`, `valor_item`, `descricao_item`, `categoria`) VALUES
+(1, 1, 'Arroz', 20, '2019-01-01', 2.5, 'Nada', 'NÃ£o PerecÃ­vel');
+
 -- --------------------------------------------------------
 
 --
@@ -153,24 +260,77 @@ CREATE TABLE `tab_pedido` (
   `hora_pedido` time DEFAULT NULL,
   `valor_total` double DEFAULT NULL,
   `cod_cliente` int(11) DEFAULT NULL,
-  `cod_funcionario` int(11) DEFAULT NULL
+  `cod_funcionario` int(11) DEFAULT NULL,
+  `status_pedido` varchar(50) NOT NULL DEFAULT 'Iniciado'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `tab_pedido`
 --
 
-INSERT INTO `tab_pedido` (`cod_pedido`, `data_pedido`, `hora_pedido`, `valor_total`, `cod_cliente`, `cod_funcionario`) VALUES
-(42, '2019-06-24', '16:32:15', 10, 18, 2),
-(43, '2019-06-24', '16:36:15', 10, 18, 2),
-(44, '2019-06-24', '16:37:47', 10, 18, 2),
-(45, '2019-06-24', '16:41:58', 10, 18, 2),
-(46, '2019-06-24', '16:42:44', 10, 18, 2),
-(47, '2019-06-24', '16:43:43', 10, 18, 2),
-(48, '2019-06-24', '16:44:52', 10, 18, 2),
-(49, '2019-06-24', '16:46:54', 10, 18, 2),
-(50, '2019-06-24', '16:48:58', 10, 18, 2),
-(51, '2019-06-24', '17:07:16', 10, 18, 2);
+INSERT INTO `tab_pedido` (`cod_pedido`, `data_pedido`, `hora_pedido`, `valor_total`, `cod_cliente`, `cod_funcionario`, `status_pedido`) VALUES
+(42, '2019-06-24', '16:32:15', 10, 18, 2, 'Iniciado'),
+(43, '2019-06-24', '16:36:15', 10, 18, 2, 'Iniciado'),
+(44, '2019-06-24', '16:37:47', 10, 18, 2, 'Iniciado'),
+(45, '2019-06-24', '16:41:58', 10, 18, 2, 'Iniciado'),
+(46, '2019-06-24', '16:42:44', 10, 18, 2, 'Iniciado'),
+(47, '2019-06-24', '16:43:43', 10, 18, 2, 'Iniciado'),
+(48, '2019-06-24', '16:44:52', 10, 18, 2, 'Iniciado'),
+(49, '2019-06-24', '16:46:54', 10, 18, 2, 'Iniciado'),
+(50, '2019-06-24', '16:48:58', 10, 18, 2, 'Iniciado'),
+(51, '2019-06-24', '17:07:16', 10, 18, 2, 'Iniciado'),
+(53, '2019-06-25', '12:15:39', 10, 18, 2, 'Iniciado'),
+(54, '2019-06-25', '12:29:34', 10, 18, 2, 'Iniciado'),
+(56, '2019-06-25', '13:03:42', 10, 18, 2, 'Iniciado'),
+(57, '2019-06-25', '13:14:25', 10, 18, 2, 'Iniciado'),
+(58, '2019-06-25', '13:15:47', 10, 18, 2, 'Iniciado'),
+(59, '2019-06-25', '13:16:04', 10, 18, 2, 'Iniciado'),
+(60, '2019-06-25', '13:17:15', 10, 18, 2, 'Iniciado'),
+(61, '2019-06-25', '13:39:35', 10, 18, 2, 'Iniciado'),
+(64, '2019-06-25', '13:39:50', 10, 18, 2, 'Iniciado'),
+(65, '2019-06-25', '13:47:08', 10, 18, 2, 'Iniciado'),
+(66, '2019-06-25', '13:49:55', 10, 18, 2, 'Iniciado'),
+(67, '2019-06-25', '13:53:06', 10, 18, 2, 'Iniciado'),
+(68, '2019-06-25', '13:54:27', 10, 18, 2, 'Iniciado'),
+(69, '2019-06-25', '14:06:47', 10, 18, 2, 'Iniciado'),
+(70, '2019-06-25', '14:15:53', 10, 18, 2, 'Iniciado'),
+(71, '2019-06-25', '14:18:46', 10, 18, 2, 'Iniciado'),
+(72, '2019-06-25', '14:22:49', 10, 18, 2, 'Iniciado'),
+(73, '2019-06-25', '14:32:58', 10, 18, 2, 'Iniciado'),
+(74, '2019-06-25', '14:34:22', 10, 18, 2, 'Iniciado'),
+(75, '2019-06-25', '14:35:00', 10, 18, 2, 'Iniciado'),
+(76, '2019-06-25', '14:35:20', 10, 18, 2, 'Iniciado'),
+(77, '2019-06-25', '14:36:34', 10, 18, 2, 'Iniciado'),
+(78, '2019-06-25', '14:37:08', 10, 18, 2, 'Iniciado'),
+(79, '2019-06-25', '14:41:58', 10, 18, 2, 'Iniciado'),
+(80, '2019-06-25', '15:09:09', 10, 18, 2, 'Iniciado'),
+(81, '2019-06-25', '15:11:16', 10, 18, 2, 'Iniciado'),
+(82, '2019-06-25', '15:12:58', 10, 18, 2, 'Iniciado'),
+(83, '2019-06-25', '15:14:33', 10, 18, 2, 'Iniciado'),
+(84, '2019-06-25', '15:28:16', 10, 18, 2, 'Iniciado'),
+(85, '2019-06-25', '15:29:06', 10, 18, 2, 'Iniciado'),
+(86, '2019-06-25', '15:43:27', 10, 18, 2, 'Iniciado'),
+(87, '2019-06-25', '15:47:44', 10, 18, 2, 'Iniciado'),
+(88, '2019-06-25', '16:11:08', 10, 18, 2, 'Iniciado'),
+(89, '2019-06-25', '16:14:07', 10, 18, 2, 'Iniciado'),
+(90, '2019-06-25', '16:15:19', 10, 18, 2, 'Iniciado'),
+(91, '2019-06-25', '17:00:12', 10, 19, 2, 'Iniciado'),
+(92, '2019-06-26', '12:23:14', 10, 19, 2, 'Iniciado'),
+(95, '2019-06-26', '12:33:48', 10, 19, 2, 'Iniciado'),
+(96, '2019-06-26', '12:37:58', 10, 19, 2, 'Iniciado'),
+(99, '2019-06-26', '14:00:50', 10, 19, 2, 'Iniciado'),
+(100, '2019-06-26', '15:24:06', 10, 18, 2, 'Iniciado'),
+(101, '2019-06-26', '15:31:09', 10, 18, 2, 'Iniciado'),
+(102, '2019-06-26', '15:44:09', 10, 19, 2, 'Iniciado'),
+(103, '2019-06-26', '15:47:32', 10, 18, 2, 'Iniciado'),
+(104, '2019-06-26', '15:59:54', 10, 18, 2, 'Iniciado'),
+(105, '2019-06-26', '16:23:26', 10, 19, 2, 'Iniciado'),
+(106, '2019-06-26', '16:25:29', 10, 18, 2, 'Iniciado'),
+(107, '2019-06-26', '16:41:49', 10, 19, 2, 'Iniciado'),
+(108, '2019-06-26', '16:49:25', 10, 18, 2, 'Iniciado'),
+(109, '2019-06-27', '15:03:13', 10, 18, 2, 'Iniciado'),
+(110, '2019-06-27', '15:45:19', 10, 19, 2, 'Iniciado'),
+(111, '2019-07-01', '13:14:25', 10, 19, 2, 'Iniciado');
 
 -- --------------------------------------------------------
 
@@ -191,7 +351,11 @@ CREATE TABLE `tab_produtovenda` (
 --
 
 INSERT INTO `tab_produtovenda` (`cod_produtovenda`, `nome_produto`, `valor_produto`, `descricao_produto`, `qnt_produto`) VALUES
-(16, 'Pizza Media', 33.5, 'Quatro queijos', 0);
+(16, 'Pizza Media', 33.5, 'Quatro queijos', 0),
+(17, 'Pizza Carne de Sol', 35, 'Boa', 0),
+(18, 'À moda da casa', 35, '4 queijos, calabresa, e verduras', 0),
+(19, 'Pizza Portuguêsa', 32.5, 'Boa', 0),
+(20, 'Coca-Cola', 5.5, '1 litro', 20);
 
 -- --------------------------------------------------------
 
@@ -280,13 +444,13 @@ ALTER TABLE `tab_usuarios`
 -- AUTO_INCREMENT for table `tab_cliente`
 --
 ALTER TABLE `tab_cliente`
-  MODIFY `cod_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `cod_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tab_fornecedor`
 --
 ALTER TABLE `tab_fornecedor`
-  MODIFY `cod_fornecedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `cod_fornecedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tab_funcionario`
@@ -298,19 +462,19 @@ ALTER TABLE `tab_funcionario`
 -- AUTO_INCREMENT for table `tab_itenscozinha`
 --
 ALTER TABLE `tab_itenscozinha`
-  MODIFY `cod_itenscozinha` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cod_itenscozinha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tab_pedido`
 --
 ALTER TABLE `tab_pedido`
-  MODIFY `cod_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `cod_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `tab_produtovenda`
 --
 ALTER TABLE `tab_produtovenda`
-  MODIFY `cod_produtovenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `cod_produtovenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tab_usuarios`

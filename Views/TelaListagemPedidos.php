@@ -6,9 +6,9 @@
 
     $conexao = $c->conexao();
 
-    $atual = date('d/m/Y');
+    $atual = date('Y/m/d');
     
-    $sql =  "SELECT data_pedido, valor_total, hora_pedido,cod_pedido, cod_cliente, status_pedido FROM `tab_pedido` WHERE data_pedido >= '$atual' ";
+    $sql =  "SELECT data_pedido, valor_total, hora_pedido, cod_pedido, cod_cliente, status_pedido FROM tab_pedido WHERE data_pedido >= '$atual' ";
 
     $result = mysqli_query($conexao, $sql);
 
@@ -19,15 +19,13 @@
 <head>
 	<title>Lista de Pedidos</title>
 	<?php require_once "TelaMenu.php" ?>
-	<link rel="stylesheet" type="text/css" href="../css/estiloListagemPedido.css">
+	<link rel="stylesheet" type="text/css" href="../css/listagem_geral.css">
 	<link rel="stylesheet" type="text/css" href="../../lib/bootstrap/css/bootstrap.css">
 </head>
 <body>
 	<div class="principal">
-		<h2>Listagem de Pedidos</h2>
-		<div id="row">
-
-
+			<div id="cabecalho_pesquisa">
+			<h2>Listagem de Pedidos</h2>
 				<div id="pesquisa">
 					<form id="frmpesquisa" action="listagem/listagemPedido.esp.php" method="POST">
 						<span id="de">De</span>
@@ -38,10 +36,11 @@
 						<!--<span class="btn btn-danger" id="btnPesquisaData">Testar</span>-->
 					</form>
 				</div>
+				<span id="mostra_data">Pedidos Feitos em <?php echo date('d/m/Y') ?></span>
+		    </div>
 				<div id="mostrapedidos">
-					<span>Pedidos Feitos, <?php echo $atual ?> </span>
 					<table border="1" class="" id="tabeladepedidos">
-						<tr id="topotabela">
+						<tr id="topo_tabela">
 							<td>data</td>
 							<td>valor</td>
 							<td>hora</td>
@@ -82,5 +81,3 @@
 
 </body>
 </html>
-
-

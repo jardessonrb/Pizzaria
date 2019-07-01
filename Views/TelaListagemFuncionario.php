@@ -17,16 +17,16 @@
 <head>
 	<title>Lista de Pedidos</title>
 	<?php require_once "TelaMenu.php" ?>
-	<link rel="stylesheet" type="text/css" href="../css/estiloListagemPedido.css">
+	<link rel="stylesheet" type="text/css" href="../css/listagem_geral.css">
 	<link rel="stylesheet" type="text/css" href="../../lib/bootstrap/css/bootstrap.css">
 </head>
 <body>
 	<div class="principal">
-		<h2>Listagem de Funcionários</h2>
-		<div id="row">
+			<div id="cabecalho_pesquisa">
+			<h2>Listagem de Funcionários</h2>
 				<div id="mostrapedidos">
 					<table border="1" class="" id="tabeladepedidos">
-						<tr id="topotabela">
+						<tr id="topo_tabela">
 							<td>Cod Funcionário</td>
 							<td>Nome</td>
 							<td>Salário</td>
@@ -36,7 +36,7 @@
 							<td>Telefone</td>
 							<td>Editar</td>
 						</tr>
-
+            </div>
 						<?php while($mostrar = mysqli_fetch_row($result)): ?>
 
 						<tr id="corpo_tabela">

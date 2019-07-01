@@ -10,7 +10,7 @@
     $data2 = $_POST['dataFim'];
 
   
-    $sql =  "SELECT cod_pedido,valor_total, hora_pedido,data_pedido,cod_cliente, status_pedido FROM `tab_pedido` WHERE data_pedido  BETWEEN '$data1' AND '$data2'";
+    $sql =  "SELECT cod_pedido,valor_total, hora_pedido,data_pedido, cli.nome_cliente, status_pedido FROM tab_pedido ped JOIN tab_cliente cli ON ped.cod_cliente = cli.cod_cliente WHERE data_pedido BETWEEN '$data1' AND '$data2'";
 
     $result = mysqli_query($conexao, $sql);
 
@@ -21,7 +21,7 @@
 <head>
 	<title>Lista de Pedidos</title>
 	<?php require_once "../dependencias.php" ?>
-	<link rel="stylesheet" type="text/css" href="../../css/estiloListagemPedido.css">
+	<link rel="stylesheet" type="text/css" href="../../css/listagem_geral.css">
 	<link rel="stylesheet" type="text/css" href="../../lib/bootstrap/css/bootstrap.css">
 
 </head>
@@ -30,7 +30,7 @@
 		<h2>Listagem de Pedidos</h2>
 				<div id="mostrapedidos">
 					<table border="1" class="" id="tabeladepedidos">
-						<tr id="topotabela">
+						<tr id="topo_tabela">
 							<td>Numero</td>
 							<td>Valor</td>
 							<td>Hora</td>
@@ -38,6 +38,7 @@
 							<td>Cliente</td>
 							<td>Status</td>
 							<td>Detalhar</td>
+							<td>Editar</td>
 							<td>Cancelar</td>
 						</tr>
 
@@ -54,6 +55,11 @@
 							   <span class="btn btn-primary btn-xs" onclick="detalharPedido('<?php echo $mostrar[0]?>')"><span>
 						        <span class="glyphicon glyphicon-search"></span>
 						      </span>
+							</td>
+							<td>
+						    <span class="btn btn-primary btn-xs" onclick="editarPedido('<?php echo $mostrar[0]?>')"><span>
+					           <span class="glyphicon glyphicon-pencil"></span>
+					        </span>
 							</td>
 							<td>
 							   <span class="btn btn-primary btn-xs" onclick="detalharPedido('<?php echo $mostrar[0]?>')"><span>

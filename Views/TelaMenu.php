@@ -40,15 +40,14 @@
           </li>  
 
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list-alt"></span> Gestão administrativa<span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list-alt"></span>Listagem administrativa<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="TelaCadFuncionario.php">Cadastro Funcionário</a></li>
-              <li><a href="TelaCadUsuario.php">Cadastro Usuário</a></li>
               <li><a href="TelaRelatorioPedido.php">Relátorio de Pedidos</a></li>
               <li><a href="TelaListagemFuncionario.php">Listagem de Funcionario</a></li>
               <li><a href="TelaListagemPedidos.php">Listagem de Pedidos</a></li>
               <li><a href="TelaListagemClientes.php">Listagem de Clientes</a></li>
-              <li><a href="TelaListagemProdutosVenda.php">Produtos Vendas</a></li>
+              <li><a href="TelaListagemProdutosVenda.php">Listagem Produtos Vendas</a></li>
+              <li><a href="TelaListagemItensCozinha.php">Listagem Itens Cozinha</a></li>
             </ul>
           </li>
  
@@ -56,6 +55,8 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Cadastros do Sistema <span class="caret"></span></a>
             <ul class="dropdown-menu">
+              <li><a href="TelaCadFuncionario.php">Cadastro Funcionário</a></li>
+              <li><a href="TelaCadUsuario.php">Cadastro Usuário</a></li>
               <li><a href="TelaCadFornecedor.php">Cadastro Fornecedor</a></li>
               <li><a href="TelaCadProduto.php">Cadastro Produtos</a></li>
               <li><a href="TelaCadCliente.php">Cadastro Clientes</a></li>
