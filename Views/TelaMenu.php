@@ -31,7 +31,7 @@
 
           </li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Gestão Inicial <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span> Gestão Inicial <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="TelaListagemPedidos.php">Listagem de Pedidos</a></li>
               <li><a href="TelaCadPedidos.php">Iniciar Novo Pedido</a></li>
@@ -45,6 +45,10 @@
               <li><a href="TelaCadFuncionario.php">Cadastro Funcionário</a></li>
               <li><a href="TelaCadUsuario.php">Cadastro Usuário</a></li>
               <li><a href="TelaRelatorioPedido.php">Relátorio de Pedidos</a></li>
+              <li><a href="TelaListagemFuncionario.php">Listagem de Funcionario</a></li>
+              <li><a href="TelaListagemPedidos.php">Listagem de Pedidos</a></li>
+              <li><a href="TelaListagemClientes.php">Listagem de Clientes</a></li>
+              <li><a href="TelaListagemProdutosVenda.php">Produtos Vendas</a></li>
             </ul>
           </li>
  

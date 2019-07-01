@@ -5,10 +5,8 @@
 	$c = new conectar();
 
     $conexao = $c->conexao();
-
-    $atual = date('d/m/Y');
     
-    $sql =  "SELECT data_pedido, valor_total, hora_pedido,cod_pedido, cod_cliente, status_pedido FROM `tab_pedido` WHERE data_pedido >= '$atual' ";
+    $sql =  "SELECT cod_funcionario, nome_funcionario, salario, data_nascimento, data_admissao, cargo, telefone FROM tab_funcionario ";
 
     $result = mysqli_query($conexao, $sql);
 
@@ -24,32 +22,19 @@
 </head>
 <body>
 	<div class="principal">
-		<h2>Listagem de Pedidos</h2>
+		<h2>Listagem de Funcionários</h2>
 		<div id="row">
-
-
-				<div id="pesquisa">
-					<form id="frmpesquisa" action="listagem/listagemPedido.esp.php" method="POST">
-						<span id="de">De</span>
-						<input type="date" class="form-control" id="dataInicio" name="dataInicio" required></input>
-						<span id="ate">Até</span>
-						<input type="date" class="form-control" id="dataFim" name="dataFim" required=""></input>
-						<button type="submit" class="btn btn-primary" id="btnPesquisaData">buscar</button>
-						<!--<span class="btn btn-danger" id="btnPesquisaData">Testar</span>-->
-					</form>
-				</div>
 				<div id="mostrapedidos">
-					<span>Pedidos Feitos, <?php echo $atual ?> </span>
 					<table border="1" class="" id="tabeladepedidos">
 						<tr id="topotabela">
-							<td>data</td>
-							<td>valor</td>
-							<td>hora</td>
-							<td>numero</td>
-							<td>Cliente</td>
-							<td>Status</td>
+							<td>Cod Funcionário</td>
+							<td>Nome</td>
+							<td>Salário</td>
+							<td>Nascimento</td>
+							<td>Admissão</td>
+							<td>Cargo</td>
+							<td>Telefone</td>
 							<td>Editar</td>
-							<td>Cancelar</td>
 						</tr>
 
 						<?php while($mostrar = mysqli_fetch_row($result)): ?>
@@ -61,14 +46,10 @@
 							<td><?php echo $mostrar[3]; ?></td>
 							<td><?php echo $mostrar[4]; ?></td>
 							<td><?php echo $mostrar[5]; ?></td>
+							<td><?php echo $mostrar[6]; ?></td>
 							<td>
 						    <span class="btn btn-primary btn-xs" onclick="editarPedido('<?php echo $mostrar[0]?>')"><span>
 					           <span class="glyphicon glyphicon-pencil"></span>
-					        </span>
-							</td>
-							<td>
-						    <span class="btn btn-primary btn-xs" onclick="cancelarPedido('<?php echo $mostrar[0]?>')"><span>
-					           <span class="glyphicon glyphicon-remove"></span>
 					        </span>
 							</td>
 						</tr>
@@ -82,5 +63,3 @@
 
 </body>
 </html>
-
-

@@ -45,7 +45,7 @@ function Valor_Total(){
 	$valor_total_compra = 0;
 
 	$id = ultimoID();
-   
+    
 	$c = new conectar();
 	$conexao=$c->conexao();
 
@@ -267,6 +267,8 @@ function Valor_Total(){
 		document.getElementById("quantidade").disabled = true;
 		document.getElementById("cod_produto").disabled = true;
 		document.getElementById("numero_pedido").disabled = true;
+		document.getElementById("valor_total_input").disabled = true;
+		
 	}
 
 	function abilitarInicio(){
@@ -308,7 +310,9 @@ function Valor_Total(){
 		});
 
 	}
-
+	function soma(ok, valor){
+		 
+	}
 
 </script>	
 

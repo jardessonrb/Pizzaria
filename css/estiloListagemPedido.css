@@ -7,6 +7,9 @@
 #pesquisa{
 
 }
+td{
+	height: 30px;
+}
 .principal{
 	margin-top: 4%;
 }
@@ -38,6 +41,7 @@
 	position: relative;
 	border: 0.1px solid;
 	width: 75%;
+	text-align: center;
 	margin-left: 5%;
 
 }

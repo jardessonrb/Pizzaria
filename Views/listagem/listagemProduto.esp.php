@@ -6,11 +6,11 @@
 
     $conexao = $c->conexao();
 
-    $data1 = $_POST['dataInicio'];
-    $data2 = $_POST['dataFim'];
+    $nome = $_POST['busca_produto_cliente'];
+    
 
   
-    $sql =  "SELECT cod_pedido,valor_total, hora_pedido,data_pedido,cod_cliente, status_pedido FROM `tab_pedido` WHERE data_pedido  BETWEEN '$data1' AND '$data2'";
+    $sql =  "SELECT cod_produtovenda, nome_produto, descricao_produto, qnt_produto, valor_produto FROM tab_produtovenda WHERE nome_produto LIKE '%$nome%';";
 
     $result = mysqli_query($conexao, $sql);
 
@@ -27,18 +27,16 @@
 </head>
 <body>
 	<div class="principal">
-		<h2>Listagem de Pedidos</h2>
+		<h2>Listagem de Cliente Especifica</h2>
 				<div id="mostrapedidos">
 					<table border="1" class="" id="tabeladepedidos">
 						<tr id="topotabela">
-							<td>Numero</td>
+							<td>Cod Produto</td>
+							<td>Nome Produto</td>
+							<td>Descrição</td>
+							<td>Qnt. Estoque</td>
 							<td>Valor</td>
-							<td>Hora</td>
-							<td>Data</td>
-							<td>Cliente</td>
-							<td>Status</td>
-							<td>Detalhar</td>
-							<td>Cancelar</td>
+							<td>Editar</td>
 						</tr>
 
 						<?php while($mostrar = mysqli_fetch_row($result)): ?>
@@ -49,16 +47,10 @@
 							<td><?php echo $mostrar[2]; ?></td>
 							<td><?php echo $mostrar[3]; ?></td>
 							<td><?php echo $mostrar[4]; ?></td>
-							<td><?php echo $mostrar[5]; ?></td>
 							<td>
-							   <span class="btn btn-primary btn-xs" onclick="detalharPedido('<?php echo $mostrar[0]?>')"><span>
-						        <span class="glyphicon glyphicon-search"></span>
-						      </span>
-							</td>
-							<td>
-							   <span class="btn btn-primary btn-xs" onclick="detalharPedido('<?php echo $mostrar[0]?>')"><span>
-						        <span class="glyphicon glyphicon-remove"></span>
-						      </span>
+						    <span class="btn btn-primary btn-xs" onclick="editarPedido('<?php echo $mostrar[0]?>')"><span>
+					           <span class="glyphicon glyphicon-pencil"></span>
+					        </span>
 							</td>
 						</tr>
 
