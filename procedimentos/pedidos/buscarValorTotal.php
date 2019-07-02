@@ -9,9 +9,8 @@ $dado = 1;
 
 $dados = array(
 
-
 );
 
-echo json_encode($obj->buscarIdPedido($dado));
+echo json_encode($obj->buscarValorTotal($dado));
 
 ?>

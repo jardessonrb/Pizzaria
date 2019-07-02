@@ -181,12 +181,13 @@ function Valor_Total(){
 						alert(r);
 						if(r==1){
 							//alertify.success("Produto Inserido");
-							document.getElementById('valor_total_input').value = <?php echo Valor_Total() ?>;
+							//document.getElementById('valor_total_input').value = <?php echo Valor_Total() ?>;
 							window.location.reload();
 							limpaCampos();
 
 
 						}else{
+							ValorTotal();
 							alertify.error("Produto não Inserido");
 						}
 					}
@@ -231,9 +232,8 @@ function Valor_Total(){
 <script type="text/javascript">
 		$(document).ready(function(){
 			$('#btnIniciarPedido').click(function(){
-
 				dados=$('#frmIniciarPedido').serialize();
-				//alert(dados);
+				
 
 				$.ajax({
 					type:"POST",
@@ -258,7 +258,7 @@ function Valor_Total(){
 	function escondercampo(){
 			document.getElementById("nome_cliente").disabled = true;
 			buscarIdPedido();
-			<?php echo Valor_Total(0) ?>;
+			<?php echo Valor_Total() ?>;
 	}
 
 	function desabilitarInicio(){
@@ -310,9 +310,24 @@ function Valor_Total(){
 		});
 
 	}
-	function soma(ok, valor){
-		 
+	function ValorTotal(){
+		dados = 1;
+		$.ajax({
+			type:"POST",
+			data:dados,
+			url:"../procedimentos/pedidos/buscarValorTotal.php",
+			success:function(r){
+				dado=jQuery.parseJSON(r);
+
+				return val(dado['soma']);
+			}
+		});
 	}
 
 </script>	
+<script type="text/javascript">
+	
+
+
+</script>
 

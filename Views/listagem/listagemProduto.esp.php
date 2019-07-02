@@ -23,10 +23,14 @@
 	<?php require_once "../dependencias.php" ?>
 	<link rel="stylesheet" type="text/css" href="../../css/listagem_geral.css">
 	<link rel="stylesheet" type="text/css" href="../../lib/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../../css/estilo_btn_voltar.css">
 
 </head>
 <body>
 	<div class="principal">
+		<div id="voltar_pesquisa">
+			<span id="btnVoltar"><a href="../TelaListagemProdutosVenda.php">Voltar</a></span>
+		</div>
 		<h2>Listagem de Cliente Especifica</h2>
 				<div id="mostrapedidos">
 					<table border="1" class="" id="tabeladepedidos">
@@ -43,8 +47,8 @@
 
 						<tr id="corpo_tabela">
 							<td><?php echo $mostrar[0]; ?></td>
-							<td><?php echo $mostrar[1]; ?></td>
-							<td><?php echo $mostrar[2]; ?></td>
+							<td><?php echo utf8_encode($mostrar[1]); ?></td>
+							<td><?php echo utf8_encode($mostrar[2]); ?></td>
 							<td><?php echo $mostrar[3]; ?></td>
 							<td><?php echo $mostrar[4]; ?></td>
 							<td>

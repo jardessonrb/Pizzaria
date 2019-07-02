@@ -23,10 +23,14 @@
 	<?php require_once "../dependencias.php" ?>
 	<link rel="stylesheet" type="text/css" href="../../css/listagem_geral.css">
 	<link rel="stylesheet" type="text/css" href="../../lib/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../../css/estilo_btn_voltar.css">
 
 </head>
 <body>
 	<div class="principal">
+		<div id="voltar_pesquisa">
+			<span id="btnVoltar"><a href="../TelaListagemClientes.php">Voltar</a></span>
+		</div>
 		<h2>Listagem de Cliente Especifica</h2>
 				<div id="mostrapedidos">
 					<table border="1" class="" id="tabeladepedidos">

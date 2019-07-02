@@ -70,13 +70,28 @@ Class Pedido{
 
     }
 
-    public function listagemPedido($dados){
+    public function buscarValorTotal($dados){
 
         $c = new conectar();
 
         $conexao = $c->conexao();
 
-        $sql = " ";
+        $sql = "SELECT ite.quantidade, pro.valor_produto from tab_produtovenda pro JOIN tab_itempedido ite on pro.cod_produtovenda = ite.cod_produtovenda where ite.cod_pedido = '71'";
+
+        $result = mysqli_query($conexao, $sql);
+
+        $soma = 0;
+
+        $mostra = mysqli_fetch_row($result);
+
+        $soma = $mostra[0] * $mostra[1];
+
+        $dados = array(
+
+            'soma' => $soma
+        );
+
+        return $dados;
 
     }
 
