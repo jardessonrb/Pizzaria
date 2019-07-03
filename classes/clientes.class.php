@@ -22,7 +22,7 @@ Class clientes{
     	$conexao = $con->conexao();
 	   
 
-		$sql = "SELECT nome_cliente, cpf_cliente, bairro_cliente, rua_cliente, numero, telefone, data_nascimento, cod_cliente FROM tab_cliente WHERE cod_cliente = '$dados[0]'";
+		$sql = "SELECT nome_cliente, cpf_cliente, bairro_cliente, rua_cliente, numero, telefone, data_nascimento, cod_cliente FROM tab_cliente WHERE cod_cliente = '$dados'";
 
 		$result = mysqli_query($conexao, $sql);
 		$mostrar = mysqli_fetch_row($result);

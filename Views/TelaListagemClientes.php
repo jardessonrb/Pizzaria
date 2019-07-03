@@ -21,7 +21,7 @@
 	<?php require_once "TelaMenu.php" ?>
 	<link rel="stylesheet" type="text/css" href="../css/listagem_geral.css">
 	<link rel="stylesheet" type="text/css" href="../css/estiloModal.css">
-	<link rel="stylesheet" type="text/css" href="../../lib/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.css">
 </head>
 <body>
 	<div class="principal">
@@ -124,7 +124,6 @@
 					$('#rua_clienteU').val(dado['rua']);
 					$('#bairro_clienteU').val(dado['bairro']);
 					$('#numero_clienteU').val(dado['numero']);					
-					$('#nascimento_clienteU').val(dado['nascimento']);
 					$('#cod_clienteU').val(dado['cod_cliente']);
 					
 				}
