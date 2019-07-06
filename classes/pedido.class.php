@@ -95,6 +95,17 @@ Class Pedido{
 
     }
 
+    public function atualizarPedidoModal($dados){
+
+        $c = new conectar();
+
+        $conexao = $c->conexao();
+
+        $sql = "UPDATE tab_pedido SET status_pedido = '$dados[1]' WHERE cod_pedido = '$dados[0]'";
+
+        return mysqli_query($conexao, $sql);
+    }
+
 }
 
 ?>

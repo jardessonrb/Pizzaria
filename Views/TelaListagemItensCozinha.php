@@ -6,11 +6,9 @@
 
     $conexao = $c->conexao();
 
-    
     $sql =  "SELECT ite.cod_itenscozinha, fornec.nome_fornecedor, ite.nome_item, ite.quantidade, ite.validade, ite.valor_item, ite.descricao_item, ite.categoria FROM tab_itenscozinha ite JOIN tab_fornecedor fornec ON ite.cod_fornecedor = fornec.cod_fornecedor";
 
     $result = mysqli_query($conexao, $sql);
-
 
 ?>
 <!DOCTYPE html>
@@ -27,9 +25,9 @@
 		<div id="cabecalho_pesquisa">
 		<h2>Listagem Itens de Cozinha</h2>
 				<div id="pesquisa">
-					<form id="frmpesquisa" action="" method="POST">
+					<form id="frmpesquisa" action="listagem/listagemItemCozinha.esp.php" method="POST">
 						<span id="de">Nome</span>
-						<input type="text" class="form-control" id="busca_nome_cliente" name="busca_nome_cliente" placeholder="Digite nome" required></input>
+						<input type="text" class="form-control" id="busca_nome_item" name="busca_nome_item" placeholder="Digite nome" required></input>
 						<button type="submit" class="btn btn-primary" id="btnPesquisaData">buscar</button>
 						<!--<span class="btn btn-danger" id="btnPesquisaData">Testar</span>-->
 					</form>

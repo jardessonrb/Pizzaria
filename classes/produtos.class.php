@@ -44,7 +44,7 @@ class produtos{
       $con = new conectar();
       $conexao = $con->conexao();
 
-      $sql = "SELECT cod_produtovenda, nome_produto, valor_produto, descricao_produto, qnt_produto FROM tab_produtovenda WHERE cod_produtovenda = '$dados[0]'";
+      $sql = "SELECT cod_produtovenda, nome_produto, valor_produto, descricao_produto, qnt_produto FROM tab_produtovenda WHERE cod_produtovenda = '$dados'";
 
 
       $result = mysqli_query($conexao, $sql);

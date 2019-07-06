@@ -2,7 +2,7 @@
 
 
 require_once "../../classes/conexao.class.php";
-require_once "../../classes/clientes.class.php";
+require_once "../../classes/produtos.class.php";
 
 
 

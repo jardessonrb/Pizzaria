@@ -23,7 +23,9 @@
 	<link rel="stylesheet" type="text/css" href="../../css/estiloModal.css">
 	<link rel="stylesheet" type="text/css" href="../../lib/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="../../css/estilo_btn_voltar.css">
-
+	<script src="../../lib/jquery-3.2.1.min.js"></script>
+	<script src="../../lib/bootstrap/js/bootstrap.js"></script>
+	
 </head>
 <body>
 	<div class="principal">
@@ -53,7 +55,7 @@
 							<td><?php echo $mostrar[4]; ?></td>
 							<td><?php echo $mostrar[5]; ?></td>
 							<td>
-								<span  data-toggle="modal" data-target="#abremodalUpdateClienteEsp" class="btn btn-primary btn-xs" onclick="atualizarClienteEsp('<?php echo $mostrar[6] ?>')">
+							<span  data-toggle="modal" data-target="#abremodalUpdateClienteEsp" class="btn btn-primary btn-xs" onclick="atualizarClienteEsp('<?php echo $mostrar[6] ?>')">
 									<span class="glyphicon glyphicon-pencil"></span>
 								</span>
 							</td>
@@ -111,6 +113,7 @@
 				url:"../../procedimentos/clientes/atualizarCliente.php",
 				success:function(r){
 					dado=jQuery.parseJSON(r);
+		
 
 					$('#nome_clienteU').val(dado['nome']);
 					$('#cpf_clienteU').val(dado['cpf']);
@@ -133,9 +136,7 @@
 					data:dados,
 					url:"../../procedimentos/clientes/atualizarClienteModal.php",
 					success:function(r){
-
 						if(r==1){
-							alertify.success("Cliente atualizado com sucesso!");
 							window.location.reload();
 						}else{
 							alertify.error("Não foi possível atualizar cliente");

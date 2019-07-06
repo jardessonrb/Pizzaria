@@ -1,12 +1,14 @@
 <?php 
 
-	require_once "../classes/conexao.class.php";
+	require_once "../../classes/conexao.class.php";
 
 	$c = new conectar();
 
     $conexao = $c->conexao();
+
+    $nome = $_POST['busca_nome_item'];
     
-    $sql =  "SELECT cod_produtovenda, nome_produto, descricao_produto, qnt_produto, valor_produto FROM tab_produtovenda";
+    $sql =  "SELECT ite.cod_itenscozinha, fornec.nome_fornecedor, ite.nome_item, ite.quantidade, ite.validade, ite.valor_item, ite.descricao_item, ite.categoria FROM tab_itenscozinha ite JOIN tab_fornecedor fornec ON ite.cod_fornecedor = fornec.cod_fornecedor WHERE ite.nome_item LIKE '%$nome%'";
 
     $result = mysqli_query($conexao, $sql);
 
@@ -15,31 +17,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Lista de Produtos</title>
-	<?php require_once "TelaMenu.php" ?>
-	<link rel="stylesheet" type="text/css" href="../css/listagem_geral.css">
+	<title>Lista de Pedidos</title>
+	<?php require_once "../dependencias.php" ?>
+	<link rel="stylesheet" type="text/css" href="../../css/listagem_geral.css">
 	<link rel="stylesheet" type="text/css" href="../../lib/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../../css/estilo_btn_voltar.css">
+
+	<script src="../../lib/jquery-3.2.1.min.js"></script>
+	<script src="../../lib/bootstrap/js/bootstrap.js"></script>	
+
 </head>
 <body>
 	<div class="principal">
-			<div id="cabecalho_pesquisa">
-			<h2>Listagem de Produtos</h2>
-			    <div id="pesquisa">
-					<form id="frmpesquisa" action="listagem/listagemProduto.esp.php" method="POST">
-						<span id="de">Nome</span>
-						<input type="text" class="form-control" id="busca_produto_cliente" name="busca_produto_cliente" placeholder="Digite nome" required></input>
-						<button type="submit" class="btn btn-primary" id="btnPesquisaData">buscar</button>
-						<!--<span class="btn btn-danger" id="btnPesquisaData">Testar</span>-->
-					</form>
-			</div>
+		<div id="voltar_pesquisa">
+			<span id="btnVoltar"><a href="../TelaListagemItensCozinha.php">Voltar</a></span>
+		</div>
+		<h2>Listagem de Produto Especifica</h2>
 				<div id="mostrapedidos">
 					<table border="1" class="" id="tabeladepedidos">
 						<tr id="topo_tabela">
-							<td>Cod Produto</td>
-							<td>Nome Produto</td>
-							<td>Descrição</td>
-							<td>Qnt. Estoque</td>
-							<td>Valor</td>
+							<td>Código</td>
+							<td>Fornecedor</td>
+							<td>Nome</td>
+							<td>Qnt em Estoque</td>
+							<td>Validade</td>
+							<td>Valor Pago</td>
+							<td>Descricao</td>
+							<td>Categoria</td>
 							<td>Editar</td>
 						</tr>
 
@@ -47,20 +51,25 @@
 
 						<tr id="corpo_tabela">
 							<td><?php echo $mostrar[0]; ?></td>
-							<td><?php echo utf8_encode($mostrar[1]); ?></td>
-							<td><?php echo utf8_encode($mostrar[2]); ?></td>
+							<td><?php echo $mostrar[1]; ?></td>
+							<td><?php echo $mostrar[2]; ?></td>
 							<td><?php echo $mostrar[3]; ?></td>
 							<td><?php echo $mostrar[4]; ?></td>
+							<td><?php echo $mostrar[5]; ?></td>
+							<td><?php echo $mostrar[6]; ?></td>
+							<td><?php echo $mostrar[7]; ?></td>
 							<td>
-						    <span  data-toggle="modal" data-target="#abremodalUpdateProduto" class="btn btn-primary btn-xs" onclick="obterDadosProdutoVendaU('<?php echo $mostrar[0] ?>')">
+								<span  data-toggle="modal" data-target="#abremodalUpdateItemEsp" class="btn btn-primary btn-xs" onclick="atualizarCliente('<?php echo $mostrar[6] ?>')">
 									<span class="glyphicon glyphicon-pencil"></span>
 								</span>
 							</td>
 						</tr>
 
-			        <?php endWhile; ?>
+			<?php endWhile; ?>
 					</table>
-		<div class="modal fade" id="abremodalUpdateProduto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					
+				</div>
+			<div class="modal fade" id="abremodalUpdateItemEsp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog modal-xm" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -88,21 +97,24 @@
 		</div>
 					
 				</div>
+				
+			</fieldset>
 		</div>
 	</div>
 
 </body>
 </html>
 <script type="text/javascript">
-		function obterDadosProdutoVendaU(idproduto){
+		function obterDadosProdutoEsp(idproduto){
 			$.ajax({
 				type:"POST",
 				data:"idproduto=" + idproduto,
-				url:"../procedimentos/produtos/obterDadosProdutoVenda.php",
+				url:"../../procedimentos/produtos/obterDadosProdutoVenda.php",
 				success:function(r){
+					
 					dado=jQuery.parseJSON(r);
 
-					$('#cod_produtoU').val(dado['cod_produtovenda']);
+					$('#cod_produtoU').val('cod_produtovenda');
 					$('#nome_produtoU').val(dado['nome_produto']);
 					$('#valor_produtoU').val(dado['valor_produto']);
 					$('#quantidade_produtoU').val(dado['qnt_produto']);
@@ -114,15 +126,18 @@
 		$(document).ready(function(){
 			$('#btnAtualizarProdutoModal').click(function(){
 				dados=$('#frmAtualizarProdutoVendaModal').serialize();
+
 				$.ajax({
 					type:"POST",
 					data:dados,
-					url:"../procedimentos/produtos/atualizarProdutoModal.php",
+					url:"../../procedimentos/produtos/atualizarProdutoModal.php",
 					success:function(r){
+
 						if(r==1){
+							alertify.success("Cliente atualizado com sucesso!");
 							window.location.reload();
 						}else{
-							alertify.error("Não foi possível atualizar o Produto");
+							alertify.error("Não foi possível atualizar cliente");
 						}
 					}
 				});

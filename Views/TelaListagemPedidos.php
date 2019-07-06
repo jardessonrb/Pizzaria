@@ -8,7 +8,7 @@
 
     $atual = date('Y/m/d');
     
-    $sql =  "SELECT data_pedido, valor_total, hora_pedido, cod_pedido, cod_cliente, status_pedido FROM tab_pedido WHERE data_pedido >= '$atual' ";
+    $sql =  "SELECT cod_pedido, data_pedido, valor_total, hora_pedido, cod_cliente, status_pedido FROM tab_pedido WHERE data_pedido >= '$atual' ";
 
     $result = mysqli_query($conexao, $sql);
 
@@ -41,10 +41,10 @@
 				<div id="mostrapedidos">
 					<table border="1" class="" id="tabeladepedidos">
 						<tr id="topo_tabela">
+							<td>numero</td>
 							<td>data</td>
 							<td>valor</td>
 							<td>hora</td>
-							<td>numero</td>
 							<td>Cliente</td>
 							<td>Status</td>
 							<td>Editar</td>
@@ -61,9 +61,9 @@
 							<td><?php echo $mostrar[4]; ?></td>
 							<td><?php echo $mostrar[5]; ?></td>
 							<td>
-						    <span class="btn btn-primary btn-xs" onclick="editarPedido('<?php echo $mostrar[0]?>')"><span>
-					           <span class="glyphicon glyphicon-pencil"></span>
-					        </span>
+							<span  data-toggle="modal" data-target="#abremodalUpdatePedido" class="btn btn-primary btn-xs" onclick="atualizarPedido('<?php echo $mostrar[0] ?>')">
+									<span class="glyphicon glyphicon-pencil"></span>
+								</span>
 							</td>
 							<td>
 						    <span class="btn btn-primary btn-xs" onclick="cancelarPedido('<?php echo $mostrar[0]?>')"><span>
@@ -78,6 +78,58 @@
 				</div>
 		</div>
 	</div>
+	<div class="modal fade" id="abremodalUpdatePedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-xm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Atualizar Status</h4>
+					</div>
+					<div class="modal-body">
+						<form id="frmAtualizarPedidoU" enctype="multipart/form-data">
+						<input type="text" hidden="" id="cod_pedidoU" name="cod_pedidoU">
+						<label>Código Fornecedor</label>
+						<select class="form-control input-sm" id="cod_statusU" name="cod_statusU">
+						<option value="0" selected="Selecione Fornecedor">Selecione Status</option>
+							<option value="Iniciado">Iniciado</option>
+							<option value="Andamento">Em andamento</option>
+							<option value="Entregue">Entregue</option>
+							<option value="Concluido">Concluído</option>
+						</select>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button id="btnAtualizarPedido" type="button" class="btn btn-warning" data-dismiss="modal">Atualizar</button>
 
+					</div>
+				</div>
+			</div>
+		</div>
 </body>
 </html>
+<script type="text/javascript">
+		$(document).ready(function(){
+			$('#btnAtualizarPedido').click(function(){
+				dados=$('#frmAtualizarPedidoU').serialize();
+				$.ajax({
+					type:"POST",
+					data:dados,
+					url:"../procedimentos/pedidos/atualizarPedidoModal.php",
+					success:function(r){
+						if(r==1){
+							window.location.reload();
+						}else{
+							alertify.error("Não foi possível atualizar pedido");
+						}
+					}
+				});
+			})
+		})
+</script>
+<script type="text/javascript">
+		function atualizarPedido(idpedido){
+			document.getElementById('cod_pedidoU').value = idpedido;
+			
+			
+		}
+</script>
