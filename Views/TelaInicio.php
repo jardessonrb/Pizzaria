@@ -11,11 +11,14 @@
 		<h1>Tela de Inicio</h1>
 	</div>
 	<div id="empresa_pizzaria">
-		<div id="img_logo">
-			<img src="../img/pizza.jpg">
-			<span id="nome_pizzaria">YOUNG PIZZARIA</span>
-		</div>
-		
+			<div id="minha_logo">
+				<span id="nome1">PIZZARIA</span><br>
+				<span id="nome2">YOUNG</span><br>
+				<span id="sub_nome">Sua melhor opção!</span>
+			</div>
+			<div id="nomePizzaria">
+					<span id="nome_pizzaria">YOUNG PIZZARIA</span>
+			</div>		
 	</div>
 </div>
 </body>
