@@ -35,6 +35,7 @@
             <ul class="dropdown-menu">
               <li><a href="TelaListagemPedidos.php">Listagem de Pedidos</a></li>
               <li><a href="TelaCadPedidos.php">Iniciar Novo Pedido</a></li>
+              <li><a href="TelaAtualizarEstoque.php">Atualizar Estoque</a></li>
               <li><a href="TesteCadastro.php">Cadastro teste</a></li>
             </ul>
           </li>  
