@@ -12,6 +12,7 @@ $dados=array(
 	$_POST['nome_produto'],
 	$_POST['valor_produto'],
 	$_POST['descricao_produto'],
+	$_POST['decremento'],
 	$_POST['quantidade_produto']
 	
 );

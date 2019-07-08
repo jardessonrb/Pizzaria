@@ -24,9 +24,16 @@ Class Pedido{
     	} else {
     		return 0;
     	}
-    	
 
+    }
+    public function atualizarEstoque($cod_pro_atualizar, $qntEstoque){
+         $c = new conectar();
 
+        $conexao = $c->conexao();
+
+        $sql = "UPDATE tab_produtovenda SET qnt_produto = '$qntEstoque' WHERE cod_produtovenda = '$cod_pro_atualizar'";
+
+        return mysqli_query($conexao, $sql);
     }
 
     public function inserirProdutoPedido($dados){
@@ -41,7 +48,9 @@ Class Pedido{
         
 
         if ($result == "false") {
-            return 1;
+
+            return self::atualizarEstoque($dados[1], $dados[3]);
+
         } else {
             return 0;
         }

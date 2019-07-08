@@ -16,7 +16,7 @@
 					<div class="panel panel-heading">Login-Sistema de Pizzaria</div>
 					<div class="panel panel-body">
 						<p>
-							<img src="img/Login.jpg"  width="100%">
+							<img src="img/logo3.jpeg"  width="100%" height="200">
 						</p>
 						<form id="frmLogin">
 							<label>Usuario</label>

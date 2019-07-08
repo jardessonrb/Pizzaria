@@ -7,7 +7,7 @@ class produtos{
   	$con = new conectar();
   	$conexao = $con->conexao();
 
-  	$sql = "INSERT INTO tab_produtovenda(nome_produto, valor_produto, descricao_produto, qnt_produto)VALUES('$dados[0]','$dados[1]','$dados[2]','$dados[3]');";
+  	$sql = "INSERT INTO tab_produtovenda(nome_produto, valor_produto, descricao_produto, decremento, qnt_produto)VALUES('$dados[0]','$dados[1]','$dados[2]','$dados[3]', '$dados[4]');";
 
 
   	return mysqli_query($conexao, $sql);
@@ -20,7 +20,7 @@ class produtos{
     	$con = new conectar();
     	$conexao = $con->conexao();
 
-    	$sql = "SELECT cod_produtovenda, nome_produto, valor_produto FROM tab_produtovenda WHERE cod_produtovenda='$dados[0]'";
+    	$sql = "SELECT cod_produtovenda, nome_produto, valor_produto, decremento, qnt_produto FROM tab_produtovenda WHERE cod_produtovenda='$dados[0]'";
 
 
     	$result = mysqli_query($conexao, $sql);
@@ -31,7 +31,9 @@ class produtos{
 
         'cod_produtovenda' => $mostra[0],
         'nome_produto' => $mostra[1],
-        'valor_produto' => $mostra[2]
+        'valor_produto' => $mostra[2],
+        'decremento' => $mostra[3],
+        'qnt_produto' => $mostra[4]
         
      );
 

@@ -9,7 +9,8 @@ $dados = array(
 
     $_POST['quantidade'],
     $_POST['codigo'],
-    $_POST['numpedido']
+    $_POST['numpedido'],
+    $_POST['atualizar']
 
 );
 

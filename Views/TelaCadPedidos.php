@@ -112,6 +112,8 @@ function Valor_Total(){
 			</div>
 			<form id="posiciona_form">
 				<label>Produto:</label>
+				<input type="text" hidden="" id="qnt_estoque" name="qnt_estoque">
+				<input type="text" hidden="" id="decremento" name="decremento">  
 				<input type="text" class="form-control input-sm" id="nome_produto" name="nome_produto" placeholder="nome produto"> 
 				<label>Valor:</label>
 				<input type="text" class="form-control input-sm" id="valor_produto" name="valor_produto" placeholder="valor"> 
@@ -172,26 +174,34 @@ function Valor_Total(){
 				var cod = document.getElementById("cod_produto").value;
 				var quant = document.getElementById("quantidade").value;
 				var num = document.getElementById("numero_pedido").value;
-		
+				var estoque = document.getElementById("qnt_estoque").value;
+				var decremento = document.getElementById("decremento").value;
+
+				var atualizar = estoque - quant;
+				alert(atualizar);
+
+				if(quant <= estoque || decremento == "nao"){
 				$.ajax({
 					type:"POST",
-					data:{codigo: cod, quantidade: quant, numpedido: num},
+					data:{codigo: cod, quantidade: quant, numpedido: num, atualizar: atualizar},
 					url:"../procedimentos/pedidos/inserirProdutoPedido.php",
 					success:function(r){
-						alert(r);
+						
 						if(r==1){
-							//alertify.success("Produto Inserido");
-							//document.getElementById('valor_total_input').value = <?php echo Valor_Total() ?>;
+							
 							window.location.reload();
 							limpaCampos();
 
-
 						}else{
-							ValorTotal();
+							
 							alertify.error("Produto não Inserido");
 						}
 					}
 				});
+			}else{
+
+				alertify.error('Quantida pedida maior que estoque');
+			}
 			});
 		});
 	</script>
@@ -201,7 +211,7 @@ function Valor_Total(){
 		$(document).ready(function(){
 			$('#btnBuscarProduto').click(function(){
 				dados=$('#frmBuscarProduto').serialize();
-				alert(dados);
+				
 				$.ajax({
 					type:"POST",
 					data: dados,
@@ -212,7 +222,8 @@ function Valor_Total(){
 
 						$('#nome_produto').val(dado['nome_produto']);
 						$('#valor_produto').val(dado['valor_produto']);
-						//$('#cod_produto').val(dado['cod_produtovenda']);
+						document.getElementById('decremento').value= dado['decremento'];
+						document.getElementById('qnt_estoque').value= dado['qnt_produto'];
 						document.getElementById('cod_produto').value= dado['cod_produtovenda'];
 						if (dado['nome_produto'] != null) {
 							abilitarQuantidade();

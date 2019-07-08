@@ -16,3 +16,32 @@ span{
 
 	color: #FFFF;
 }
+#empresa_pizzaria{
+	
+	width: 50%;
+	position: relative;
+	margin-top: 10%;
+	margin-left: 25%;
+}
+#nome_pizzaria{
+	font-size: 70px;
+	font-family: Black Jack;
+
+}
+#nome_pizzaria:hover{
+	font-size: 80px;
+	margin-top: -40px;
+	transition-delay: 2s;
+	transition-color: 1.5s;
+	transform-style: line
+}
+#sub_nome{
+	font-family: Black Jack;
+	font-size: 30px;
+	color: red;
+	margin-left: 38%;
+}
+#apresenta{
+	transition-size: 2s;
+	font-size: 20px;
+}

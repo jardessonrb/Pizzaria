@@ -19,6 +19,12 @@
 						<input type="text" class="form-control input-sm" id="nome_produto" name="nome_produto">
 						<label>Valor do Produto</label>
 						<input type="text" class="form-control input-sm" id="valor_produto" name="valor_produto">
+						<label>Forma de Armazenamento</label>
+						<select class="form-control" id="decremento" name="decremento">
+							<option value="0">Selecione forma de estoque</option>
+							<option value="sim">Possui Estoque</option>
+							<option value="nao">Não Possui Estoque</option>
+						</select>
 						<label>Quantidade</label>
 						<input type="text" class="form-control input-sm" id="quantidade_produto" name="quantidade_produto">
 						<label>Descrição</label>
