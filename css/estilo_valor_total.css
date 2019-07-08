@@ -1,0 +1,17 @@
+#valor_table_tr{
+	background: #333;
+	color: #FFFF;
+}
+.valor_total_td{
+	height: 30px;
+}
+#valor_tt{
+	text-align: left;
+	border: 1px solid #FFFF;
+}
+#titulo_valor{
+	text-align: left;
+}
+#valor_table_tr{
+	border: 1px solid #FFFF;
+}

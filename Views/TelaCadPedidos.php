@@ -32,7 +32,7 @@
 	$c = new conectar();
 	$conexao=$c->conexao();
 
-	$sql="SELECT pro.cod_produtovenda, pro.nome_produto,ite.quantidade, pro.valor_produto from  tab_produtovenda pro JOIN tab_itempedido ite on pro.cod_produtovenda = ite.cod_produtovenda where ite.cod_pedido = '$id' ";
+	$sql="SELECT pro.cod_produtovenda, pro.nome_produto,ite.quantidade, pro.valor_produto from  tab_produtovenda pro JOIN tab_itempedido ite on pro.cod_produtovenda = ite.cod_produtovenda where ite.cod_pedido = '$id' LIMIT 11 ";
 
 	$result = mysqli_query($conexao, $sql);
 
@@ -78,10 +78,11 @@ function Valor_Total(){
 	<script src="../lib/jquery-3.2.1.min.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="../css/estiloTelaPedido.css">
+	<link rel="stylesheet" type="text/css" href="../css/estilo_valor_total.css">
 	<script type="text/javascript">
 		window.onload = function(){
 
-          desabilitarInicio();
+	        desabilitarInicio();
 
 		}
 	</script>
@@ -134,6 +135,7 @@ function Valor_Total(){
 					<td width="80">Val Produto</td>
 					<td width="80">Total Uni</td>
 					<td width="80">Cancelar</td>
+					<?php $soma = 0 ?>
 				</tr>
 				<?php while($mostrar = mysqli_fetch_row($result)): ?>
 
@@ -143,6 +145,7 @@ function Valor_Total(){
 					<td><?php echo $mostrar[2]; ?></td>
 					<td><?php echo $mostrar[3]; ?></td>
 					<td><?php echo $mostrar[2] * $mostrar[3]; ?></td>
+					<?php $soma = $soma + ($mostrar[2] * $mostrar[3]) ?>
 					<td>
 					   <span class="btn btn-danger btn-xs" onclick="excluirMemorando('<?php echo $mostrar[0]?>')"><span>
 				        <span class="glyphicon glyphicon-remove"></span>
@@ -151,12 +154,17 @@ function Valor_Total(){
 				</tr>
 
 			<?php endWhile; ?>
-
+			<table id="valor_total_table">
+				<tr id="valor_table_tr">
+					<td class="valor_total_td" id="titulo_valor" width="480">Valor total</td>
+					<td class="valor_total_td" id="valor_tt" width="160">R$  <?php echo $soma ?> ,00</td>
+				</tr>
+			</table>
+			
 			</table>
 			<div id="finalizarCompra">
-				<label id="valor_total_label">Valor Total</label>
+				
 				<div id="label_btn">
-					<input type="text" id="valor_total_input" name="valor_total_input">
 					<span class="btn btn-danger" id="btnFinalizarCompra">Concluir
 					</span>
 				</div>
@@ -172,15 +180,16 @@ function Valor_Total(){
 			$('#btnInserirProduto').click(function(){
 				//dados=$('#posiciona_form').serialize();
 				var cod = document.getElementById("cod_produto").value;
-				var quant = document.getElementById("quantidade").value;
+				var quant = parseInt(document.getElementById("quantidade").value);
 				var num = document.getElementById("numero_pedido").value;
-				var estoque = document.getElementById("qnt_estoque").value;
+				var estoque = parseInt(document.getElementById("qnt_estoque").value);
 				var decremento = document.getElementById("decremento").value;
 
 				var atualizar = estoque - quant;
 				alert(atualizar);
 
-				if(quant <= estoque || decremento == "nao"){
+				if(decremento == "sim" && quant >= 0 && quant <= estoque){
+
 				$.ajax({
 					type:"POST",
 					data:{codigo: cod, quantidade: quant, numpedido: num, atualizar: atualizar},
@@ -198,10 +207,29 @@ function Valor_Total(){
 						}
 					}
 				});
-			}else{
 
-				alertify.error('Quantida pedida maior que estoque');
-			}
+			 }if(decremento != "sim" && quant > 0){
+				$.ajax({
+					type:"POST",
+					data:{codigo: cod, quantidade: quant, numpedido: num, atualizar: atualizar},
+					url:"../procedimentos/pedidos/inserirProdutoPedido.php",
+					success:function(r){
+						
+						if(r==1){
+							
+							window.location.reload();
+							limpaCampos();
+
+						}else{
+							
+							alertify.error("Produto não Inserido");
+						}
+					}
+				});
+			 }else{
+			 	alert("Verifique o campo quantidade ou verfique estoque de produto!");
+			 }
+			 
 			});
 		});
 	</script>

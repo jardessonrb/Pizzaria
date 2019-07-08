@@ -80,6 +80,18 @@ class produtos{
 
   }
 
+  public function atualizarProdutoEstoque($dados){
+    $con = new conectar();
+
+    $conexao = $con->conexao();
+
+    $sql = "UPDATE tab_produtovenda SET qnt_produto = '$dados[2]', decremento = '$dados[1]' WHERE cod_produtovenda = '$dados[0]'";
+
+
+    echo mysqli_query($conexao, $sql);
+
+  }
+
 }
 
 ?>
