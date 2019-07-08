@@ -11,8 +11,8 @@
 		<h1>Tela de Inicio</h1>
 	</div>
 	<div id="empresa_pizzaria">
-		<span id="nome_pizzaria">YOUNG PIZZARIA</span><br>
-		<span id="sub_nome">O melhor para sua empresa.</span>
+		<span class="span_inicio" id="nome_pizzaria">YOUNG PIZZARIA</span><br>
+		<span class="span_inicio" id="sub_nome">O melhor para sua empresa.</span>
 	</div>
 </div>
 </body>

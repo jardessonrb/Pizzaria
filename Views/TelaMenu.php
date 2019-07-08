@@ -70,7 +70,7 @@
           glyphicon glyphicon-user
           
           <li class="dropdown" >
-            <a href="#" style="color: red"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Usuario:   <span class="caret"></span></a>
+            <a href="#" style="color: red"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Usuario:<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li> <a style="color: red" href="../"><span class="glyphicon glyphicon-off"></span> Sair</a></li>
               

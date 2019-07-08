@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 01-Jul-2019 às 17:18
--- Versão do servidor: 10.1.35-MariaDB
--- versão do PHP: 7.2.9
+-- Generation Time: 08-Jul-2019 às 02:43
+-- Versão do servidor: 10.1.38-MariaDB
+-- versão do PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -44,8 +44,8 @@ CREATE TABLE `tab_cliente` (
 --
 
 INSERT INTO `tab_cliente` (`cod_cliente`, `nome_cliente`, `cpf_cliente`, `telefone`, `data_nascimento`, `rua_cliente`, `bairro_cliente`, `numero`) VALUES
-(18, 'jardesson ribeiro dos santos', '54585555555', '99568522223', '2019-06-24', 'Centro', 'Centro', 326),
-(19, 'AugustoTadeu', '9666555555', '9999666666', '1998-06-25', 'centro', 'Centro', 125),
+(18, 'jÃ¡rdesson ribeiro ', '54585555555', '99568522223', '2019-06-24', 'Centro', 'Centro', 326),
+(19, 'AugustoTadeu', '9666555555', '10005999999', '1998-06-25', 'centro', 'Centro', 125),
 (20, 'MariÃ¡ Sousa Maos', '454655664', '9525785555', '1995-02-18', 'Sul', 'Sul', 123);
 
 -- --------------------------------------------------------
@@ -222,7 +222,20 @@ INSERT INTO `tab_itempedido` (`quantidade`, `cod_produtovenda`, `cod_pedido`) VA
 (1, 16, 108),
 (1, 16, 109),
 (20, 16, 110),
-(1, 16, 111);
+(1, 16, 111),
+(1, 16, 112),
+(1, 20, 112),
+(2, 16, 113),
+(1, 20, 114),
+(21, 24, 115),
+(19, 25, 116),
+(20, 20, 116),
+(20, 20, 116),
+(19, 20, 117),
+(10, 20, 117),
+(2, 25, 117),
+(18, 25, 117),
+(1, 20, 117);
 
 -- --------------------------------------------------------
 
@@ -330,7 +343,13 @@ INSERT INTO `tab_pedido` (`cod_pedido`, `data_pedido`, `hora_pedido`, `valor_tot
 (108, '2019-06-26', '16:49:25', 10, 18, 2, 'Iniciado'),
 (109, '2019-06-27', '15:03:13', 10, 18, 2, 'Iniciado'),
 (110, '2019-06-27', '15:45:19', 10, 19, 2, 'Iniciado'),
-(111, '2019-07-01', '13:14:25', 10, 19, 2, 'Iniciado');
+(111, '2019-07-01', '13:14:25', 10, 19, 2, 'Concluido'),
+(112, '2019-07-06', '12:09:51', 10, 19, 2, 'Iniciado'),
+(113, '2019-07-06', '23:34:22', 10, 19, 2, 'Concluido'),
+(114, '2019-07-06', '23:34:40', 10, 20, 2, 'Concluido'),
+(115, '2019-07-07', '18:38:11', 10, 19, 2, 'Concluido'),
+(116, '2019-07-07', '19:20:56', 10, 18, 2, 'Andamento'),
+(117, '2019-07-07', '19:30:07', 10, 18, 2, 'Iniciado');
 
 -- --------------------------------------------------------
 
@@ -340,22 +359,27 @@ INSERT INTO `tab_pedido` (`cod_pedido`, `data_pedido`, `hora_pedido`, `valor_tot
 
 CREATE TABLE `tab_produtovenda` (
   `cod_produtovenda` int(11) NOT NULL,
-  `nome_produto` varchar(50) DEFAULT NULL,
+  `nome_produto` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `valor_produto` double DEFAULT NULL,
-  `descricao_produto` varchar(60) DEFAULT NULL,
+  `descricao_produto` varchar(60) CHARACTER SET utf8 DEFAULT NULL,
+  `decremento` varchar(3) NOT NULL DEFAULT 'nao',
   `qnt_produto` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `tab_produtovenda`
 --
 
-INSERT INTO `tab_produtovenda` (`cod_produtovenda`, `nome_produto`, `valor_produto`, `descricao_produto`, `qnt_produto`) VALUES
-(16, 'Pizza Media', 33.5, 'Quatro queijos', 0),
-(17, 'Pizza Carne de Sol', 35, 'Boa', 0),
-(18, 'À moda da casa', 35, '4 queijos, calabresa, e verduras', 0),
-(19, 'Pizza Portuguêsa', 32.5, 'Boa', 0),
-(20, 'Coca-Cola', 5.5, '1 litro', 20);
+INSERT INTO `tab_produtovenda` (`cod_produtovenda`, `nome_produto`, `valor_produto`, `descricao_produto`, `decremento`, `qnt_produto`) VALUES
+(16, 'Pizza de Calabresa  Media', 33.5, 'Quatro queijos', 'nao', 0),
+(17, 'Pizza Carne de Sol- Tam Grande', 35, 'Mais Pedida', 'nao', 0),
+(19, 'Pizza Portuguêsa', 32.5, 'Boa', 'nao', 0),
+(20, 'Coca-Cola', 5.5, '1 litro', 'sim', 9),
+(21, 'Ã  moda da familia', 20, 'Teste', 'nao', 0),
+(22, 'Ã moda do chefe', 25, 'teste 2', 'nao', 0),
+(23, 'Ã€ moda da casa', 35, 'Muito boa', 'nao', 0),
+(24, 'Fanta Uva', 5.2, 'Boa', 'sim', 0),
+(25, 'Fanta Uva', 5.15, 'Teste', 'sim', 0);
 
 -- --------------------------------------------------------
 
@@ -468,13 +492,13 @@ ALTER TABLE `tab_itenscozinha`
 -- AUTO_INCREMENT for table `tab_pedido`
 --
 ALTER TABLE `tab_pedido`
-  MODIFY `cod_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `cod_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT for table `tab_produtovenda`
 --
 ALTER TABLE `tab_produtovenda`
-  MODIFY `cod_produtovenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `cod_produtovenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tab_usuarios`
