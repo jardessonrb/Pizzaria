@@ -7,6 +7,7 @@
 	$sql = "SELECT cod_cliente, nome_cliente FROM tab_cliente";
 	$nomes = mysqli_query($conexao, $sql);
  ?>
+
  <?php
 	function ultimoID(){
 	   require_once "../classes/conexao.class.php";
@@ -24,6 +25,7 @@
     }
 
  ?>
+
  <?php 
 	require_once "../classes/conexao.class.php";
 
@@ -32,40 +34,14 @@
 	$c = new conectar();
 	$conexao=$c->conexao();
 
-	$sql="SELECT pro.cod_produtovenda, pro.nome_produto,ite.quantidade, pro.valor_produto from  tab_produtovenda pro JOIN tab_itempedido ite on pro.cod_produtovenda = ite.cod_produtovenda where ite.cod_pedido = '$id' LIMIT 11 ";
+	/*$sql="SELECT pro.cod_produtovenda, pro.nome_produto,ite.quantidade, pro.valor_produto from  tab_produtovenda pro JOIN tab_itempedido ite on pro.cod_produtovenda = ite.cod_produtovenda where ite.cod_pedido = '$id' LIMIT 11 ";*/
+
+	$sql = "SELECT pro.cod_produtovenda, pro.nome_produto,ite.quantidade, pro.valor_produto from  tab_produtovenda pro JOIN tab_itempedido ite JOIN tab_pedido ped on pro.cod_produtovenda = ite.cod_produtovenda AND ite.cod_pedido = ped.cod_pedido where ped.cod_pedido = '$id' AND ped.fechado = 'nao'";
 
 	$result = mysqli_query($conexao, $sql);
 
 ?>
 
-<?php 
-function Valor_Total(){
-	require_once "../classes/conexao.class.php";
-
-	$valor_total_compra = 0;
-
-	$id = ultimoID();
-    
-	$c = new conectar();
-	$conexao=$c->conexao();
-
-	$sql="SELECT ite.quantidade, pro.valor_produto from tab_produtovenda pro JOIN tab_itempedido ite on pro.cod_produtovenda = ite.cod_produtovenda where ite.cod_pedido = '$id' ";
-
-	$result = mysqli_query($conexao, $sql);
-
-	while($mostrar = mysqli_fetch_row($result)):
-
-		$valor_unidade = $mostrar[0] * $mostrar[1];
-
-		$valor_total_compra = $valor_total_compra + $valor_unidade;
-
-	endWhile;
-
-	return $valor_total_compra;
-
-}
-
-?>
 
 <!DOCTYPE html>
 <html>
@@ -154,22 +130,13 @@ function Valor_Total(){
 				</tr>
 
 			<?php endWhile; ?>
-			<table id="valor_total_table">
-				<tr id="valor_table_tr">
-					<td class="valor_total_td" id="titulo_valor" width="480">Valor total</td>
-					<td class="valor_total_td" id="valor_tt" width="160">R$  <?php echo $soma ?> ,00</td>
-				</tr>
-			</table>
-			
 			</table>
 			<div id="finalizarCompra">
-				
-				<div id="label_btn">
-					<span class="btn btn-danger" id="btnFinalizarCompra">Concluir
-					</span>
-				</div>
+			        <div id="div_label_total"><label id="valor_total_label">Valor Total</label></div>
+			        <div id="div_btn_concluir"><span class="btn btn-danger" onclick="setValorTotal(<?php echo $soma ?>)" id="btnFinalizarCompra">Concluir
+					</span></div>
+					<div id="div_mostra_valor_total"><span id="span_mostra_valor_total">R$ <?php echo $soma ?>, 00</span></div>				
 			</div>
-       		</fieldset>
        	</div>
        </div> 
 </body>
@@ -183,6 +150,7 @@ function Valor_Total(){
 				var quant = parseInt(document.getElementById("quantidade").value);
 				var num = document.getElementById("numero_pedido").value;
 				var estoque = parseInt(document.getElementById("qnt_estoque").value);
+				var valor_item = document.getElementById("valor_produto").value;
 				var decremento = document.getElementById("decremento").value;
 
 				var atualizar = estoque - quant;
@@ -192,7 +160,7 @@ function Valor_Total(){
 
 				$.ajax({
 					type:"POST",
-					data:{codigo: cod, quantidade: quant, numpedido: num, atualizar: atualizar},
+					data:{codigo: cod, valor_item: valor_item, quantidade: quant, numpedido: num, atualizar: atualizar},
 					url:"../procedimentos/pedidos/inserirProdutoPedido.php",
 					success:function(r){
 						
@@ -211,7 +179,7 @@ function Valor_Total(){
 			 }if(decremento != "sim" && quant > 0){
 				$.ajax({
 					type:"POST",
-					data:{codigo: cod, quantidade: quant, numpedido: num, atualizar: atualizar},
+					data:{codigo: cod, valor_item: valor_item, quantidade: quant, numpedido: num, atualizar: atualizar},
 					url:"../procedimentos/pedidos/inserirProdutoPedido.php",
 					success:function(r){
 						
@@ -297,7 +265,6 @@ function Valor_Total(){
 	function escondercampo(){
 			document.getElementById("nome_cliente").disabled = true;
 			buscarIdPedido();
-			<?php echo Valor_Total() ?>;
 	}
 
 	function desabilitarInicio(){
@@ -335,6 +302,33 @@ function Valor_Total(){
 
 	}
 
+	function zeraPedido(){
+		
+	}
+
+	function setValorTotal(valor){
+		var num_pedido = document.getElementById("numero_pedido").value;
+		alert("Codigo Pedido "+num_pedido+" Valor Total "+valor);
+		$.ajax({
+			type:"POST",
+			data:{numero_pedido: num_pedido, valor_total_pedido: valor},
+			url:"../procedimentos/pedidos/finalizarPedidoTotal.php",
+			success:function(r){	
+
+				if(r == 1){
+
+					zeraPedido();
+					window.location.reload();
+
+				}else{
+					alertify.error("O pedido não foi finalizado");
+				}
+					
+			}
+		});
+		
+	}
+
 	function buscarIdPedido(){
 		dados = 1;
 		$.ajax({
@@ -348,19 +342,6 @@ function Valor_Total(){
 			}
 		});
 
-	}
-	function ValorTotal(){
-		dados = 1;
-		$.ajax({
-			type:"POST",
-			data:dados,
-			url:"../procedimentos/pedidos/buscarValorTotal.php",
-			success:function(r){
-				dado=jQuery.parseJSON(r);
-
-				return val(dado['soma']);
-			}
-		});
 	}
 
 </script>	

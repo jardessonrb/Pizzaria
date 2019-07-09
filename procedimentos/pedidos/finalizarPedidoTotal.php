@@ -5,12 +5,16 @@ require_once "../../classes/conexao.class.php";
 
 $obj = new Pedido();
 
-$dado = 1;
+
 
 $dados = array(
 
+	$_POST['numero_pedido'],
+	$_POST['valor_total_pedido']
+
 );
 
-echo json_encode($obj->buscarValorTotal($dado));
+echo $obj->finalizarPedidoTotal($dados);
+
 
 ?>
