@@ -302,9 +302,8 @@
 
 	}
 
-	function zeraPedido(){
 		
-	}
+
 
 	function setValorTotal(valor){
 		var num_pedido = document.getElementById("numero_pedido").value;
@@ -317,8 +316,8 @@
 
 				if(r == 1){
 
-					zeraPedido();
-					window.location.reload();
+					window.location.href="../Views/TelaCadPedidos.php";
+					
 
 				}else{
 					alertify.error("O pedido não foi finalizado");
