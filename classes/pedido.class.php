@@ -8,8 +8,10 @@ Class Pedido{
 
 		$conexao = $c->conexao();
 
+        session_start();
+
 		$valto = 00;
-		$codfun = 2;
+		$codfun = $_SESSION['cod_func'];
     	$data = date('Y/m/d');
     	$hora = date('H:i:s');
     		

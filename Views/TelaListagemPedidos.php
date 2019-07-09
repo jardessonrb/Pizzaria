@@ -8,7 +8,9 @@
 
     $atual = date('Y/m/d');
     
-    $sql =  "SELECT cod_pedido, data_pedido, valor_total, hora_pedido, cod_cliente, status_pedido FROM tab_pedido WHERE data_pedido >= '$atual' ";
+    /*$sql =  "SELECT cod_pedido, data_pedido, valor_total, hora_pedido, cod_cliente, status_pedido FROM tab_pedido WHERE data_pedido >= '$atual' AND status_pedido != 'concluido'";*/
+
+    $sql = "SELECT ped.cod_pedido, ped.data_pedido, ped.valor_total, ped.hora_pedido, cli.nome_cliente, ped.status_pedido FROM tab_pedido  ped JOIN tab_cliente cli on ped.cod_cliente = cli.cod_cliente WHERE data_pedido >= '09/07/2019' AND status_pedido != 'concluido'";
 
     $result = mysqli_query($conexao, $sql);
 
