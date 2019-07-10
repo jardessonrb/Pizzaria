@@ -154,7 +154,7 @@
 				var decremento = document.getElementById("decremento").value;
 
 				var atualizar = estoque - quant;
-				alert(atualizar);
+				
 
 				if(decremento == "sim" && quant >= 0 && quant <= estoque){
 
@@ -305,7 +305,7 @@
 
 	function setValorTotal(valor){
 		var num_pedido = document.getElementById("numero_pedido").value;
-		alert("Codigo Pedido "+num_pedido+" Valor Total "+valor);
+		
 		$.ajax({
 			type:"POST",
 			data:{numero_pedido: num_pedido, valor_total_pedido: valor},
@@ -313,7 +313,7 @@
 			success:function(r){	
 
 				if(r == 1){
-					alert("Finalizar");
+					
 					window.location.href="../Views/TelaCadPedidos.php";
 
 				}else{

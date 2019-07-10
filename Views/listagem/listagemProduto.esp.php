@@ -52,6 +52,9 @@
 							<td><?php echo $mostrar[0]; ?></td>
 							<td><?php echo utf8_encode($mostrar[1]); ?></td>
 							<td><?php echo utf8_encode($mostrar[2]); ?></td>
+							<?php if ($mostrar[3] <= 0) {
+								$mostrar[3] = "N Possui Estoque";
+							} ?>
 							<td><?php echo $mostrar[3]; ?></td>
 							<td><?php echo $mostrar[4]; ?></td>
 							<td>
@@ -100,7 +103,7 @@
 </html>
 <script type="text/javascript">
 		function obterDadosProdutoEspU(idproduto){
-			alert(idproduto);
+			document.getElementById("quantidade_produtoU").disabled = true;
 			$.ajax({
 				type:"POST",
 				data:"idproduto=" + idproduto,
@@ -111,7 +114,11 @@
 					$('#cod_produtoU').val(dado['cod_produtovenda']);
 					$('#nome_produtoU').val(dado['nome_produto']);
 					$('#valor_produtoU').val(dado['valor_produto']);
-					$('#quantidade_produtoU').val(dado['qnt_produto']);
+					if (dado['qnt_produto'] <= 0) {
+					    $('#quantidade_produtoU').val("N Possui Estoque");
+					}else{
+						$('#quantidade_produtoU').val(dado['qnt_produto']);
+					}
 					$('#descricao_produtoU').val(dado['descricao_produto']);
 					
 				}

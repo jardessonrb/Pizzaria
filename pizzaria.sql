@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 10-Jul-2019 às 17:27
+-- Generation Time: 10-Jul-2019 às 17:52
 -- Versão do servidor: 10.1.35-MariaDB
 -- versão do PHP: 7.2.9
 
@@ -47,7 +47,8 @@ INSERT INTO `tab_cliente` (`cod_cliente`, `nome_cliente`, `cpf_cliente`, `telefo
 (18, 'jÃ¡rdesson ribeiro dos Santos', '54585555555', '99568522223', '2019-06-24', 'Centro', 'Centro', 326),
 (19, 'AugustoTadeu', '9666555555', '10005999999', '1998-06-25', 'centro', 'Centro', 125),
 (20, 'MariÃ¡ Sousa Maos', '454655664', '9525785555', '1995-02-18', 'Sul', 'Sul', 123),
-(21, 'Cliente Teste', '45456466464', '45464564564', '1999-11-17', 'Das Flores', 'SÃ£o Luiz', 1);
+(21, 'Anne Frank ', '45456466464', '45464564564', '1999-11-17', 'Das Flores', 'SÃ£o Luiz', 225),
+(22, 'Amadeu cardoso', '45788999999', '9457855555', '1988-05-05', 'Rua', 'Bairro', 215);
 
 -- --------------------------------------------------------
 
@@ -72,7 +73,8 @@ CREATE TABLE `tab_fornecedor` (
 --
 
 INSERT INTO `tab_fornecedor` (`cod_fornecedor`, `nome_fornecedor`, `razao_social`, `cnpj_fornecedor`, `email`, `telefone`, `bairro_fornecedor`, `rua_fornecedor`, `numero`) VALUES
-(1, 'MiniDevsIfpi', 'MiniDevsIfpi Ltda', '1245784545', 'minidevsifpi@gmai.com', '99658999', 'Centro', 'Ubn', 4450);
+(1, 'MiniDevsIfpi', 'MiniDevsIfpi Ltda', '1245784545', 'minidevsifpi@gmai.com', '99658999', 'Centro', 'Ubn', 4450),
+(2, 'Dev-Supervisionado', 'Dv-Sp', '4254888', 'supervisionado@gmail.com', '95456558888', 'Bairro', 'Rua', 125);
 
 -- --------------------------------------------------------
 
@@ -100,7 +102,7 @@ CREATE TABLE `tab_funcionario` (
 --
 
 INSERT INTO `tab_funcionario` (`cod_funcionario`, `nome_funcionario`, `cargo`, `data_nascimento`, `cpf_funcionario`, `telefone1`, `telefone2`, `data_admissao`, `rua_funci`, `bairro_funci`, `numero`, `salario`) VALUES
-(1, 'Jardesson Ribeiro', 'Administrador', '1999-11-17', '12457888888', '994586666', '4788888', '2019-05-01', 'Centro', 'Centro', 335, 1000),
+(1, 'Jardesson Ribeiro s', 'Administrador', '1999-11-17', '12457888888', '45458858885', '47888884588', '2019-05-01', 'Centro', 'Centro', 335, 1000),
 (2, 'Jonatas', 'Contador', '1994-12-16', '9659888888', '65589999999', '965688999', '2019-06-05', 'Zona Rural', 'Zona Rural', 2458, 1500),
 (3, 'JoÃ£o da Solova', 'vendedor', '2019-07-10', '12145458888', '956455884', '54586666666', '1985-02-02', 'Centro', 'Bairro', 125, 988);
 
@@ -181,7 +183,9 @@ INSERT INTO `tab_itempedido` (`cod_item`, `quantidade`, `valor_item`, `cod_produ
 (57, 2, 33.5, 16, 179),
 (58, 1, 5.5, 20, 180),
 (59, 1, 5.5, 20, 181),
-(60, 2, 5.5, 20, 182);
+(60, 2, 5.5, 20, 182),
+(61, 1, 33.5, 16, 183),
+(62, 1, 5.5, 20, 183);
 
 -- --------------------------------------------------------
 
@@ -205,9 +209,10 @@ CREATE TABLE `tab_itenscozinha` (
 --
 
 INSERT INTO `tab_itenscozinha` (`cod_itenscozinha`, `cod_fornecedor`, `nome_item`, `quantidade`, `validade`, `valor_item`, `descricao_item`, `categoria`) VALUES
-(1, 1, 'Arroz', 20, '2019-01-01', 10, 'Nada', 'NPerecivel'),
+(1, 1, 'Arroz', 20, '2019-01-01', 10, 'Nada', 'Bebida'),
 (2, 1, 'Teste  ', 20, '2019-07-12', 5.5, 'daddad', 'NPerecivel'),
-(3, 1, 'Teste Pizzaria', 20, '2019-07-12', 2.5, 'asdafsd', 'Bebida');
+(3, 1, 'Teste Pizzaria', 20, '2019-07-12', 2.5, 'asdafsd', 'Alimentar'),
+(4, 2, 'SabÃ£o OMO', 30, '2020-07-13', 2.5, 'Nada', 'Limpeza');
 
 -- --------------------------------------------------------
 
@@ -298,7 +303,7 @@ INSERT INTO `tab_pedido` (`cod_pedido`, `data_pedido`, `hora_pedido`, `valor_tot
 (114, '2019-07-06', '23:34:40', 10, 20, 2, 'Concluido', 'nao'),
 (115, '2019-07-07', '18:38:11', 10, 19, 2, 'Concluido', 'nao'),
 (116, '2019-07-07', '19:20:56', 10, 18, 2, 'Andamento', 'nao'),
-(117, '2019-07-07', '19:30:07', 10, 18, 2, 'Iniciado', 'nao'),
+(117, '2019-07-07', '19:30:07', 10, 18, 2, 'Concluido', 'nao'),
 (118, '2019-07-08', '15:11:54', 10, 21, 2, 'Iniciado', 'nao'),
 (119, '2019-07-08', '15:13:53', 10, 21, 2, 'Iniciado', 'nao'),
 (120, '2019-07-08', '15:33:29', 10, 21, 2, 'Iniciado', 'sim'),
@@ -350,10 +355,11 @@ INSERT INTO `tab_pedido` (`cod_pedido`, `data_pedido`, `hora_pedido`, `valor_tot
 (172, '2019-07-09', '17:42:58', 5.5, 18, 1, 'Iniciado', 'sim'),
 (173, '2019-07-09', '17:45:30', 39, 19, 1, 'Iniciado', 'sim'),
 (178, '2019-07-10', '16:43:14', 33.5, 19, 1, 'Concluido', 'sim'),
-(179, '2019-07-10', '16:53:29', 72.5, 19, 3, 'Iniciado', 'sim'),
-(180, '2019-07-10', '17:22:30', 5.5, 20, 3, 'Iniciado', 'sim'),
+(179, '2019-07-10', '16:53:29', 72.5, 19, 3, 'Entregue', 'sim'),
+(180, '2019-07-10', '17:22:30', 5.5, 20, 3, 'Entregue', 'sim'),
 (181, '2019-07-10', '17:23:18', 5.5, 20, 1, 'Iniciado', 'sim'),
-(182, '2019-07-10', '17:25:27', 11, 21, 1, 'Iniciado', 'sim');
+(182, '2019-07-10', '17:25:27', 11, 21, 1, 'Concluido', 'sim'),
+(183, '2019-07-10', '17:47:35', 39, 22, 2, 'Iniciado', 'sim');
 
 -- --------------------------------------------------------
 
@@ -375,16 +381,16 @@ CREATE TABLE `tab_produtovenda` (
 --
 
 INSERT INTO `tab_produtovenda` (`cod_produtovenda`, `nome_produto`, `valor_produto`, `descricao_produto`, `decremento`, `qnt_produto`) VALUES
-(16, 'Pizza de Calabresa  Media ', 33.5, 'Quatro queijos .', 'nao', -44),
+(16, 'Pizza de Calabresa  Media ', 33.5, 'Quatro queijos .', 'nao', -45),
 (17, 'Pizza Carne de Sol- Tam Grande', 35, 'Mais Pedida', 'nao', -3),
 (19, 'Pizza Portuguêsa', 32.5, 'Boa', 'nao', 0),
-(20, 'Coca-Cola', 5.5, '1 litro', 'sim', 18),
+(20, 'Coca-Cola', 5.5, '2 Litros', 'sim', 37),
 (21, 'Ã  moda da familia', 20, 'Teste', 'nao', -1),
 (22, 'Ã moda do chefe', 25, 'teste 2', 'nao', -2),
 (23, 'Ã€ moda da casa', 35, 'Muito boa', 'nao', 0),
-(24, 'Fanta Uva', 5.2, 'Boa', 'sim', 0),
+(24, 'Fanta Uva', 5.2, 'Boa', 'sim', 20),
 (25, 'Fanta Uva', 5.15, 'Teste', 'sim', 4),
-(27, 'Suco de Acerola', 4.5, 'SaudÃ¡vel', 'sim', 0);
+(27, 'Suco de Acerola', 4.5, 'SaudÃ¡vel', 'sim', 20);
 
 -- --------------------------------------------------------
 
@@ -475,13 +481,13 @@ ALTER TABLE `tab_usuarios`
 -- AUTO_INCREMENT for table `tab_cliente`
 --
 ALTER TABLE `tab_cliente`
-  MODIFY `cod_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `cod_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tab_fornecedor`
 --
 ALTER TABLE `tab_fornecedor`
-  MODIFY `cod_fornecedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cod_fornecedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tab_funcionario`
@@ -493,19 +499,19 @@ ALTER TABLE `tab_funcionario`
 -- AUTO_INCREMENT for table `tab_itempedido`
 --
 ALTER TABLE `tab_itempedido`
-  MODIFY `cod_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `cod_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `tab_itenscozinha`
 --
 ALTER TABLE `tab_itenscozinha`
-  MODIFY `cod_itenscozinha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cod_itenscozinha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tab_pedido`
 --
 ALTER TABLE `tab_pedido`
-  MODIFY `cod_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `cod_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 
 --
 -- AUTO_INCREMENT for table `tab_produtovenda`

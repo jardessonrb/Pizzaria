@@ -80,7 +80,7 @@ $result = mysqli_query($conexao, $sql);
 					data:dados,
 					url:"../procedimentos/itenscozinha/cadastraritemcozinha.php",
 					success:function(r){
-						alert(r);
+					
 
 						if(r==1){
 							$('#frmCadProdutoCozinha')[0].reset();

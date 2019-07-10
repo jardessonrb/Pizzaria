@@ -50,7 +50,6 @@
 							<td>Cliente</td>
 							<td>Status</td>
 							<td>Editar</td>
-							<td>Cancelar</td>
 						</tr>
 
 						<?php while($mostrar = mysqli_fetch_row($result)): ?>
@@ -66,11 +65,6 @@
 							<span  data-toggle="modal" data-target="#abremodalUpdatePedido" class="btn btn-primary btn-xs" onclick="atualizarPedido('<?php echo $mostrar[0] ?>')">
 									<span class="glyphicon glyphicon-pencil"></span>
 								</span>
-							</td>
-							<td>
-						    <span class="btn btn-primary btn-xs" onclick="cancelarPedido('<?php echo $mostrar[0]?>')"><span>
-					           <span class="glyphicon glyphicon-remove"></span>
-					        </span>
 							</td>
 						</tr>
 

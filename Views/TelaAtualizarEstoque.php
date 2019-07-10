@@ -93,14 +93,13 @@
 
 			var qnt_atualizada = qnt_estoque + qnt_reposta;
 
-			alert(qnt_atualizada + cod_produto);
 
 			$.ajax({
 				type:"POST",
 				data:{cod_produto: cod_produto, decremento: decremento, qnt_atualizada: qnt_atualizada},
 				url:"../procedimentos/produtos/ProdutoEstoque.atualizar.php",
 				success:function(r){
-					alert(r);
+					
 					if(r==1){
 						
 						alertify.success("Produto atualizado");
