@@ -12,6 +12,7 @@ Class Pedido{
 
 		$valto = 00;
 		$codfun = $_SESSION['cod_func'];
+        //$codfun = 1;
     	$data = date('Y/m/d');
     	$hora = date('H:i:s');
     		

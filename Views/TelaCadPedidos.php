@@ -283,9 +283,7 @@
 		document.getElementById("nome_cliente").disabled = false;
 		
 	}
-	function desabilitarNomeCliente(){
-		
-	}
+
 
 	function abilitarQuantidade(){
 		document.getElementById("quantidade").disabled = false;
@@ -315,11 +313,11 @@
 			success:function(r){	
 
 				if(r == 1){
-
+					alert("Finalizar");
 					window.location.href="../Views/TelaCadPedidos.php";
-					
 
 				}else{
+
 					alertify.error("O pedido não foi finalizado");
 				}
 					
@@ -344,9 +342,5 @@
 	}
 
 </script>	
-<script type="text/javascript">
-	
 
-
-</script>
 

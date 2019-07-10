@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Lista de Clientes</title>
+	<title>Lista de Itens Cozinha</title>
 	<?php require_once "TelaMenu.php" ?>
 	<link rel="stylesheet" type="text/css" href="../css/listagem_geral.css">
 	<link rel="stylesheet" type="text/css" href="../css/estiloModal.css">
@@ -59,7 +59,7 @@
 							<td><?php echo $mostrar[6]; ?></td>
 							<td><?php echo $mostrar[7]; ?></td>
 							<td>
-								<span  data-toggle="modal" data-target="#abremodalUpdateProduto" class="btn btn-primary btn-xs" onclick="atualizarCliente('<?php echo $mostrar[6] ?>')">
+								<span  data-toggle="modal" data-target="#abremodalUpdateItemEsp" class="btn btn-primary btn-xs" onclick="obterItemCozinha('<?php echo $mostrar[0] ?>')">
 									<span class="glyphicon glyphicon-pencil"></span>
 								</span>
 							</td>
@@ -71,36 +71,39 @@
 				</div>
 		</div>
 	</div>
-	<div class="modal fade" id="abremodalUpdateProduto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="abremodalUpdateItemEsp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog modal-xm" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">Atualizar Cliente</h4>
+						<h4 class="modal-title" id="myModalLabel">Atualizar Produto</h4>
 					</div>
 					<div class="modal-body">
-						<form id="frmAtualizarClienteU" enctype="multipart/form-data">
-						<input type="text" hidden="" id="cod_clienteU" name="cod_clienteU">
+					<form id="frmAtualizarItemCozinhaModal" enctype="multipart/form-data">
+						<input type="text" hidden="" id="cod_itemcozinhaU" name="cod_itemcozinhaU">
 						<label>Nome</label>
-						<input type="text" class="form-control input-sm" id="nome_clienteU" name="nome_clienteU">
-						<label>CPF</label>
-						<input type="text" class="form-control input-sm" id="cpf_clienteU" name="cpf_clienteU">
-						<label>Telefone</label>
-						<input type="text" class="form-control input-sm" id="telefone_clienteU" name="telefone_clienteU">
-						<label>Nascimento</label>
-						<input type="date" class="form-control input-sm" id="nascimento_clienteU" name="nascimento_clienteU" required="true">
-						<label>Endereco-Rua</label>
-						<input type="text" class="form-control input-sm" id="rua_clienteU" name="rua_clienteU">
-						<label>Endereco-Bairro</label>
-						<input type="text" class="form-control input-sm" id="bairro_clienteU" name="bairro_clienteU">
-						<label>Endereco-N° Casa</label>
-						<input type="number" class="form-control input-sm" id="numero_clienteU" name="numero_clienteU">
-							
-						</form>
+						<input type="text" class="form-control input-sm" id="nome_itemcozinhaU" name="nome_itemcozinhaU">
+						<label>Valor do Produto</label>
+						<input type="text" class="form-control input-sm" id="valor_itemcozinhaU" name="valor_itemcozinhaU">
+						<label>Qnt Atual Estoque</label>
+						<input type="text" class="form-control input-sm" id="quantidade_itemcozinhaU" name="quantidade_itemcozinhaU">
+						<label>Descrição</label>
+						<textarea class="form-control input-sm" id="descricao_itemcozinhaU" name="descricao_itemcozinhaU"></textarea>
+						<label>Validade do Produto</label>
+						<input type="date" class="form-control input-sm" id="validade_itemcozinhaU" name="validade_itemcozinhaU">
+						<label>Categoria do Item</label>
+						<select type="text" class="form-control input-sm" 
+						    id="categoria_itemcozinhaU" name="categoria_itemcozinhaU">
+						    <option value="0" selected="Selecione Categoria">Selecione Categoria</option>
+							<option value="Limpeza">Limpeza</option>
+							<option value="NPerecivel">Não Perecível</option>
+							<option value="Alimentar">Alimenticía</option>
+							<option value="Bebida">Bedida</option>
+						</select>
+					</form>
 					</div>
 					<div class="modal-footer">
-						<button id="btnAtualizarCliente" type="button" class="btn btn-warning" data-dismiss="modal">Atualizar</button>
-
+						<button id="btnAtualizarItemModal" type="button" class="btn btn-warning" data-dismiss="modal">Atualizar</button>
 					</div>
 				</div>
 			</div>
@@ -109,43 +112,42 @@
 </body>
 </html>
 <script type="text/javascript">
-		function atualizarCliente(idcliente){
+		function obterItemCozinha(iditemcozinha){
 			$.ajax({
 				type:"POST",
-				data:"idcliente=" + idcliente,
-				url:"../procedimentos/clientes/atualizarCliente.php",
+				data:"iditemcozinha=" + iditemcozinha,
+				url:"../procedimentos/itenscozinha/obterItemCozinha.php",
 				success:function(r){
 					
 					dado=jQuery.parseJSON(r);
 
-					$('#nome_clienteU').val(dado['nome']);
-					$('#cpf_clienteU').val(dado['cpf']);
-					$('#telefone_clienteU').val(dado['telefone']);
-					$('#nascimento_clienteU').val(dado['nascimento']);
-					$('#rua_clienteU').val(dado['rua']);
-					$('#bairro_clienteU').val(dado['bairro']);
-					$('#numero_clienteU').val(dado['numero']);					
-					$('#nascimento_clienteU').val(dado['nascimento']);
-					$('#cod_clienteU').val(dado['cod_cliente']);
+					$('#cod_itemcozinhaU').val(dado['codigo']);
+					$('#nome_itemcozinhaU').val(dado['nome']);
+					$('#valor_itemcozinhaU').val(dado['valor']);
+					$('#quantidade_itemcozinhaU').val(dado['qnt_estoque']);
+					$('#descricao_itemcozinhaU').val(dado['descricao']);
+					$('#validade_itemcozinhaU').val(dado['validade']);
+					$('#categoria_itemcozinhaU').val(dado['categoria']);					
+					
 					
 				}
 			});
 		}
 		$(document).ready(function(){
-			$('#btnAtualizarCliente').click(function(){
-				dados=$('#frmAtualizarClienteU').serialize();
+			$('#btnAtualizarItemModal').click(function(){
+				dados=$('#frmAtualizarItemCozinhaModal').serialize();
 
 				$.ajax({
 					type:"POST",
 					data:dados,
-					url:"../procedimentos/clientes/atualizarClienteModal.php",
+					url:"../procedimentos/itenscozinha/atualizarItemModal.php",
 					success:function(r){
 
 						if(r==1){
-							alertify.success("Cliente atualizado com sucesso!");
+							alertify.success("Item Cozinha atualizado com sucesso!");
 							window.location.reload();
 						}else{
-							alertify.error("Não foi possível atualizar cliente");
+							alertify.error("Não foi possível atualizar Item Cozinha");
 						}
 					}
 				});

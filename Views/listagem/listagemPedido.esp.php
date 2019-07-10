@@ -44,9 +44,7 @@
 							<td>Data</td>
 							<td>Cliente</td>
 							<td>Status</td>
-							<td>Detalhar</td>
 							<td>Atualizar</td>
-							<td>Cancelar</td>
 						</tr>
 
 						<?php while($mostrar = mysqli_fetch_row($result)): ?>
@@ -59,19 +57,9 @@
 							<td><?php echo $mostrar[4]; ?></td>
 							<td><?php echo $mostrar[5]; ?></td>
 							<td>
-							   <span class="btn btn-primary btn-xs" onclick="detalharPedido('<?php echo $mostrar[0]?>')"><span>
-						        <span class="glyphicon glyphicon-search"></span>
-						      </span>
-							</td>
-							<td>
 							<span  data-toggle="modal" data-target="#abremodalUpdatePedidoEsp" class="btn btn-primary btn-xs" onclick="atualizarPedidoEsp('<?php echo $mostrar[0] ?>')">
 									<span class="glyphicon glyphicon-pencil"></span>
 								</span>
-							</td>
-							<td>
-							   <span class="btn btn-primary btn-xs" onclick="detalharPedido('<?php echo $mostrar[6]?>')"><span>
-						        <span class="glyphicon glyphicon-remove"></span>
-						      </span>
 							</td>
 						</tr>
 

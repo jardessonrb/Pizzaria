@@ -37,10 +37,10 @@
 					        </div>
 					        <hr>
 								<label>Telefone 01</label>
-								<input type="text" class="form-control input-sm" id="telefone_funcio" name="telefone_funcio1">
+								<input type="text" class="form-control input-sm" maxlength="11" id="telefone_funcio" name="telefone_funcio1">
 							<div class="posicionatel">
 								<label>Telefone 02</label>
-								<input type="text" class="form-control input-sm" id="telefone_funcio" name="telefone_funcio2">
+								<input type="text" class="form-control input-sm" maxlength="11" id="telefone_funcio" name="telefone_funcio2">
 							</div>
 							
 				        </div>

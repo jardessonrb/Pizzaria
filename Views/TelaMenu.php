@@ -1,6 +1,3 @@
-<?php 
-  session_start();
-?>
 <?php require_once "dependencias.php" ?>
 
 <!DOCTYPE html>
@@ -26,7 +23,7 @@
         <div id="navbar" class="collapse navbar-collapse">
 
           <ul class="nav navbar-nav navbar-right">
-            <span id="mostra_usuario" style="color: #FFFF;">Usuario: <?php echo $_SESSION['usuario'] ?></span>
+            <!--<span id="mostra_usuario" style="color: #FFFF;">Usuario: <?php echo $_SESSION['usuario'] ?></span>-->
             
 
             <li class="active"><a href="TelaInicio.php"><span class="glyphicon glyphicon-home"></span> Inicio</a>
@@ -40,17 +37,13 @@
               <li><a href="TelaListagemPedidos.php">Listagem de Pedidos</a></li>
               <li><a href="TelaCadPedidos.php">Iniciar Novo Pedido</a></li>
               <li><a href="TelaAtualizarEstoque.php">Atualizar Estoque</a></li>
-              <li><a href="TesteCadastro.php">Cadastro teste</a></li>
             </ul>
           </li>  
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list-alt"></span>Listagem administrativa<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <?php if($_SESSION['usuario'] == "admin"): ?>
-                <li><a href="TelaRelatorioPedido.php">Relátorio de Pedidos</a></li>
-                <li><a href="TelaListagemFuncionario.php">Listagem de Funcionario</a></li>
-              <?php endif; ?>
+              <li><a href="TelaListagemFuncionario.php">Listagem de Funcionario</a></li>
               <li><a href="TelaListagemPedidos.php">Listagem de Pedidos</a></li>
               <li><a href="TelaListagemClientes.php">Listagem de Clientes</a></li>
               <li><a href="TelaListagemProdutosVenda.php">Listagem Produtos Vendas</a></li>
@@ -62,11 +55,9 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Cadastros do Sistema <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <?php if($_SESSION['usuario'] == "admin"): ?>
                 <li><a href="TelaCadFuncionario.php">Cadastro Funcionário</a></li>
                 <li><a href="TelaCadUsuario.php">Cadastro Usuário</a></li>
                 <li><a href="TelaCadFornecedor.php">Cadastro Fornecedor</a></li>
-              <?php endif; ?>
                 <li><a href="TelaCadProduto.php">Cadastro Produtos</a></li>
                 <li><a href="TelaCadCliente.php">Cadastro Clientes</a></li>
                 <li><a href="TelaCadItemCozinha.php">Cadastro Itens de Cozinha</a></li>

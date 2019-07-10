@@ -45,10 +45,16 @@ $result = mysqli_query($conexao, $sql);
 						<input type="text" class="form-control input-sm" id="valor_produto" name="valor_produto">
 						<label>Descricão</label>
 						<textarea class="form-control input-sm" id="descricao_produto" name="descricao_produto"></textarea>
-						<label>Categoria Produto</label>
-						<input type="text" class="form-control input-sm" id="categoria_produto" name="categoria_produto">
-						<p></p>
-						<span class="btn btn-primary" style="position: relative; margin-left: 270px" id="btnCadastrarProdutoCozinha">Cadastrar</span>
+						<label>Categoria do Item</label>
+						<select type="text" class="form-control input-sm" 
+						    id="categoria_produto" name="categoria_produto">
+						    <option value="0" selected="Selecione Cliente">Selecione Categoria</option>
+							<option value="Limpeza">Limpeza</option>
+							<option value="NPerecivel">Não Perecível</option>
+							<option value="Alimentar">Alimenticía</option>
+							<option value="Bebida">Bedida</option>
+						</select>
+						<span class="btn btn-primary" style="position: relative; margin-left: 270px; margin-top:  10px;" id="btnCadastrarProdutoCozinha">Cadastrar</span>
 					</form>
 				</div>
 			</div>
@@ -86,4 +92,4 @@ $result = mysqli_query($conexao, $sql);
 				});
 			});
 		});
-	</script>
+</script>

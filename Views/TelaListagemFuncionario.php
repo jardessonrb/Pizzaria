@@ -6,7 +6,7 @@
 
     $conexao = $c->conexao();
     
-    $sql =  "SELECT cod_funcionario, nome_funcionario, salario, data_nascimento, data_admissao, cargo, telefone FROM tab_funcionario ";
+    $sql =  "SELECT cod_funcionario, nome_funcionario, salario, data_nascimento, data_admissao, cargo, telefone1, telefone2 FROM tab_funcionario ";
 
     $result = mysqli_query($conexao, $sql);
 
@@ -33,7 +33,8 @@
 							<td>Nascimento</td>
 							<td>Admissão</td>
 							<td>Cargo</td>
-							<td>Telefone</td>
+							<td>Telefone 01</td>
+							<td>Telefone 02</td>
 							<td>Editar</td>
 						</tr>
             </div>
@@ -47,8 +48,9 @@
 							<td><?php echo $mostrar[4]; ?></td>
 							<td><?php echo $mostrar[5]; ?></td>
 							<td><?php echo $mostrar[6]; ?></td>
+							<td><?php echo $mostrar[7]; ?></td>
 							<td>
-								<span  data-toggle="modal" data-target="#abremodalUpdateFuncionario" class="btn btn-primary btn-xs" onclick="atualizarCliente('<?php echo $mostrar[6] ?>')">
+								<span  data-toggle="modal" data-target="#abremodalUpdateFuncionario" class="btn btn-primary btn-xs" onclick="obterDadosFuncionario('<?php echo $mostrar[0] ?>')">
 									<span class="glyphicon glyphicon-pencil"></span>
 								</span>
 							</td>
@@ -65,26 +67,31 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">Atualizar Cliente</h4>
+						<h4 class="modal-title" id="myModalLabel">Atualizar Funcionário</h4>
 					</div>
 					<div class="modal-body">
-						<form id="frmAtualizarClienteU" enctype="multipart/form-data">
-						<input type="text" hidden="" id="cod_clienteU" name="cod_clienteU">
-						<label>Nome</label>
-						<input type="text" class="form-control input-sm" id="nome_clienteU" name="nome_clienteU">
-						<label>CPF</label>
-						<input type="text" class="form-control input-sm" id="cpf_clienteU" name="cpf_clienteU">
-						<label>Telefone</label>
-						<input type="text" class="form-control input-sm" id="telefone_clienteU" name="telefone_clienteU">
-						<label>Nascimento</label>
-						<input type="date" class="form-control input-sm" id="nascimento_clienteU" name="nascimento_clienteU" required="true">
-						<label>Endereco-Rua</label>
-						<input type="text" class="form-control input-sm" id="rua_clienteU" name="rua_clienteU">
-						<label>Endereco-Bairro</label>
-						<input type="text" class="form-control input-sm" id="bairro_clienteU" name="bairro_clienteU">
-						<label>Endereco-N° Casa</label>
-						<input type="number" class="form-control input-sm" id="numero_clienteU" name="numero_clienteU">
-							
+						<form id="frmAtualizarFuncionarioU" enctype="multipart/form-data">
+							<input type="text" hidden="" id="cod_funcionarioU" name="cod_funcionarioU">
+							<label>Nome</label>
+							<input type="text" class="form-control input-sm" id="nome_funcionarioU" name="nome_funcionarioU">
+							<label>CPF</label>
+							<input type="text" class="form-control input-sm" id="cpf_funcionarioU" name="cpf_funcionarioU">
+							<label>Telefone</label>
+							<input type="text" class="form-control input-sm" id="telefone_funcionarioU" name="telefone_funcionarioU">
+							<label>Telefone</label>
+							<input type="text" class="form-control input-sm" id="telefone_funcionarioU2" name="telefone_funcionarioU2">
+							<label>Nascimento</label>
+							<input type="date" class="form-control input-sm" id="nascimento_funcionarioU" name="nascimento_funcionarioU" required="true">
+							<label>Cargo</label>
+							<input type="text" class="form-control input-sm" id="cargo_funcionarioU" name="cargo_funcionarioU" required="true">
+							<label>Salario</label>
+							<input type="text" class="form-control input-sm" id="salario_funcionarioU" name="salario_funcionarioU" required="true">
+							<label>Endereco-Rua</label>
+							<input type="text" class="form-control input-sm" id="rua_funcionarioU" name="rua_funcionarioU">
+							<label>Endereco-Bairro</label>
+							<input type="text" class="form-control input-sm" id="bairro_funcionarioU" name="bairro_funcionarioU">
+							<label>Endereco-N° Casa</label>
+							<input type="number" class="form-control input-sm" id="numero_funcionarioU" name="numero_funcionarioU">	
 						</form>
 					</div>
 					<div class="modal-footer">
@@ -97,30 +104,37 @@
 </body>
 </html>
 <script type="text/javascript">
-		function btnAtualizarFuncionario(idcliente){
+		function obterDadosFuncionario(idfuncionario){
+
 			$.ajax({
 				type:"POST",
-				data:"idcliente=" + idcliente,
-				url:"../procedimentos/clientes/atualizarCliente.php",
+				data:"idfuncionario=" + idfuncionario,
+				url:"../procedimentos/funcionario/obterDadosFuncionario.php",
 				success:function(r){
 					
 					dado=jQuery.parseJSON(r);
 
-					$('#nome_clienteU').val(dado['nome']);
-					$('#cpf_clienteU').val(dado['cpf']);
-					$('#telefone_clienteU').val(dado['telefone']);
-					$('#nascimento_clienteU').val(dado['nascimento']);
-					$('#rua_clienteU').val(dado['rua']);
-					$('#bairro_clienteU').val(dado['bairro']);
-					$('#numero_clienteU').val(dado['numero']);					
-					$('#cod_clienteU').val(dado['cod_cliente']);
+
+					$('#cod_funcionarioU').val(dado['cod_funcionario']);
+					$('#nome_funcionarioU').val(dado['nome']);
+					$('#cpf_funcionarioU').val(dado['cpf']);
+					$('#telefone_funcionarioU').val(dado['telefone1']);
+					$('#nascimento_funcionarioU').val(dado['nascimento']);
+					$('#rua_funcionarioU').val(dado['rua']);
+					$('#bairro_funcionarioU').val(dado['bairro']);
+					$('#numero_funcionarioU').val(dado['numero']);					
+					$('#cargo_funcionarioU').val(dado['cargo']);
+					$('#salario_funcionarioU').val(dado['salario']);
+					$('#telefone_funcionarioU2').val(dado['telefone2']);
+					
+
 					
 				}
 			});
 		}
 		$(document).ready(function(){
-			$('#btnAtualizarCliente').click(function(){
-				dados=$('#frmAtualizarClienteU').serialize();
+			$('#btnAtualizarFuncionario').click(function(){
+				dados=$('#frmAtualizarFuncionarioU').serialize();
 
 				$.ajax({
 					type:"POST",
@@ -129,9 +143,11 @@
 					success:function(r){
 
 						if(r==1){
+
 							window.location.reload();
+
 						}else{
-							alertify.error("Não foi possível atualizar cliente");
+							alertify.error("Não foi possível atualizar funcionário");
 						}
 					}
 				});
